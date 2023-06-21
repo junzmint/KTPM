@@ -1,4 +1,4 @@
-# NMCNPM.20221-Nhom2
+# KTPM - GR3
 
 SoftwareEng-Project
 
