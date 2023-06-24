@@ -1,6 +1,30 @@
 'use client';
-import { data } from 'autoprefixer';
 import React, { useState, useEffect } from 'react';
+
+async function refreshAccessToken() {
+  const refreshToken = localStorage.getItem('refresh_token') ||sessionStorage.getItem('refresh_token');
+
+  const response = await fetch('http://localhost:5000/auth/genToken', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ refreshToken }),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    localStorage.setItem('access_token', data.access_token);
+    return true;
+  } else {
+    localStorage.removeItem('access_token');
+    sessionStorage.removeItem('access_token');
+    // Redirect to the login page
+    window.location.href = '';
+    return false;
+  }
+}
+
 
 function LoginForm() {
   const [phone, setPhone] = useState('');
@@ -69,10 +93,23 @@ function LoginForm() {
 }
 
 function LogoutButton() {
-  const handleLogout = () => {
-    localStorage.removeItem('access_token');
-    sessionStorage.removeItem('access_token');
-    // Redirect to the login page
+  const handleLogout = async () => {
+    const token = localStorage.getItem('access_token') ||sessionStorage.getItem('access_token');
+
+    const response = await fetch('http://localhost:5000/auth/logout', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+
+  if (response.ok) {
+    localStorage.removeItem('access_token')||sessionStorage.removeItem('access_token');
+    window.location.href = '';
+  } else {
+    // handle logout error
+  }
     window.location.href = '';
   };
 

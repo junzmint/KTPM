@@ -56,6 +56,7 @@ exports.generateToken = async (req, res, next) => {
   if (access_token) {
     req.session = { access_token };
     return res.status(200).json({
+      access_token,
       response_status: 1,
       message: 'Refresh token successfully!',
     });
