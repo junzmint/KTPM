@@ -25,7 +25,7 @@ exports.login = [
     .isLength({ min: 8 })
     .isAlphanumeric()
     .withMessage('Password must not contain special character'),
-  body('role').exists({ checkFalsy: true }).withMessage('Role is required'),
+  // body('role').exists({ checkFalsy: true }).withMessage('Role is required'),
 ];
 
 exports.genResetToken = [

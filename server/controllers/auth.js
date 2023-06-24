@@ -14,8 +14,8 @@ const userService = require('../services/user');
 const smsService = require('../services/sms');
 
 exports.login = async (req, res, next) => {
-  const { phone, password, role } = req.body;
-  const check_user = await userService.getUserByPhoneRole({ phone, role });
+  const { phone, password } = req.body;
+  const check_user = await userService.getUserByPhone({ phone });
   if (!check_user) {
     throw new DataNotFoundError('User not found');
   }
@@ -39,8 +39,9 @@ exports.login = async (req, res, next) => {
     response_status: 1,
     message: 'Login successfully!',
     data: {
+      role: check_user.role,
       refresh_token,
-      access_token
+      access_token,
     },
   });
 };
