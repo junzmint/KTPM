@@ -12,6 +12,7 @@ const {
 const authService = require('../services/auth');
 const userService = require('../services/user');
 const smsService = require('../services/sms');
+const { authToken } = require('../middlewares/is-auth');
 
 exports.login = async (req, res, next) => {
   const { phone, password } = req.body;
