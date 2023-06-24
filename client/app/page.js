@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from 'react';
 
 async function refreshAccessToken() {
-  const refreshToken = localStorage.getItem('refresh_token') ||sessionStorage.getItem('refresh_token');
+  const refreshToken =
+    localStorage.getItem('refresh_token') ||
+    sessionStorage.getItem('refresh_token');
 
   const response = await fetch('http://localhost:5000/auth/genToken', {
     method: 'POST',
@@ -24,7 +26,6 @@ async function refreshAccessToken() {
     return false;
   }
 }
-
 
 function LoginForm() {
   const [phone, setPhone] = useState('');
@@ -94,23 +95,25 @@ function LoginForm() {
 
 function LogoutButton() {
   const handleLogout = async () => {
-    const token = localStorage.getItem('access_token') ||sessionStorage.getItem('access_token');
+    const token =
+      localStorage.getItem('access_token') ||
+      sessionStorage.getItem('access_token');
 
     const response = await fetch('http://localhost:5000/auth/logout', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    },
-  });
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-  if (response.ok) {
-    localStorage.removeItem('access_token')||sessionStorage.removeItem('access_token');
-    window.location.href = '';
-  } else {
-    // handle logout error
-  }
-    window.location.href = '';
+    if (response.ok) {
+      localStorage.removeItem('access_token') ||
+        sessionStorage.removeItem('access_token');
+      window.location.href = '';
+    } else {
+      // handle logout error
+    }
   };
 
   return (
@@ -128,9 +131,8 @@ function App() {
     const jwt =
       localStorage.getItem('access_token') ||
       sessionStorage.getItem('access_token');
-    if (jwt) 
-      setIsAuthenticated(true);
-    else{
+    if (jwt) setIsAuthenticated(true);
+    else {
       setIsAuthenticated(false);
     }
   };
@@ -139,6 +141,33 @@ function App() {
     checkAuthentication();
   }, []);
 
+  useEffect(() => {
+    const check401 = async (response) => {
+      if (response.status === 401) {
+        const success = await refreshAccessToken();
+        if (success) {
+          window.location.reload();
+        }
+      }
+    };
+
+    const token =
+      localStorage.getItem('access_token') ||
+      sessionStorage.getItem('access_token');
+
+    if (token) {
+      fetch('http://localhost:5000/auth/protected', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((response) => {
+        if (response.status === 401) {
+          check401(response);
+        }
+      });
+    }
+  }, []);
   return <div>{isAuthenticated ? <LogoutButton /> : <LoginForm />}</div>;
 }
 
