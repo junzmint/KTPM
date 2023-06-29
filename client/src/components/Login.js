@@ -11,7 +11,7 @@ const LoginForm = () => {
   const router = useRouter();
   const handleLogin = async (event) => {
     event.preventDefault();
-    const response = await fetch("http://localhost:5000/auth/login", {
+    const response = await fetch("http://localhost:6000/auth/login", {
       method: "POST",
       body: JSON.stringify({ phone, password }),
       headers: { "Content-Type": "application/json" },
