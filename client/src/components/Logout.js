@@ -5,7 +5,7 @@ function LogoutButton() {
       localStorage.getItem('access_token') ||
       sessionStorage.getItem('access_token');
 
-    const response = await fetch('http://localhost:5000/auth/logout', {
+    const response = await fetch('http://localhost:6000/auth/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
