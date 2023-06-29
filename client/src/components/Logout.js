@@ -19,7 +19,11 @@ const LogoutButton = () => {
 
     if (response.ok) {
       localStorage.removeItem("access_token") ||
-        sessionStorage.removeItem("access_token");
+      sessionStorage.removeItem("access_token");
+      localStorage.removeItem("role") ||
+      sessionStorage.removeItem("role");
+      localStorage.removeItem("refresh_token") ||
+      sessionStorage.removeItem("refresh_token");
       router.push("/");
     } else {
       // handle logout error
