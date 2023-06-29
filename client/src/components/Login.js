@@ -11,17 +11,20 @@ const LoginForm = () => {
   const router = useRouter();
   const handleLogin = async (event) => {
     event.preventDefault();
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
     const response = await fetch("http://localhost:6000/auth/login", {
       method: "POST",
       body: JSON.stringify({ phone, password }),
-      headers: { "Content-Type": "application/json" },
+      headers: myHeaders,
+      redirect: "follow",
     });
     const data = await response.json();
     if (response.ok) {
       if (rememberMe) {
         localStorage.setItem("access_token", data.data.access_token);
         localStorage.setItem("refresh_token", data.data.refresh_token);
-        window.location.href = "/leader";
+        router.push("/leader");
       } else {
         sessionStorage.setItem("access_token", data.data.access_token);
         sessionStorage.setItem("refresh_token", data.data.refresh_token);
@@ -65,7 +68,6 @@ const LoginForm = () => {
         />
       </label>
       <br />
-      <Link href="/leader">Click here</Link>
       <button type="submit">Login</button>
     </form>
   );

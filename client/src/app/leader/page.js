@@ -9,7 +9,7 @@ const Dashboard = () => {
         localStorage.getItem("access_token") ||
         sessionStorage.getItem("access_token");
       try {
-        const response = await fetch("http://localhost:5000/user/userList", {
+        const response = await fetch("http://localhost:6000/user/userList", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

@@ -6,7 +6,7 @@ async function refreshAccessToken() {
     localStorage.getItem("refresh_token") ||
     sessionStorage.getItem("refresh_token");
 
-  const response = await fetch("http://localhost:5000/auth/genToken", {
+  const response = await fetch("http://localhost:6000/auth/genToken", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -60,7 +60,7 @@ function App() {
       sessionStorage.getItem("access_token");
 
     if (token) {
-      fetch("http://localhost:5000/auth/protected", {
+      fetch("http://localhost:6000/auth/protected", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
