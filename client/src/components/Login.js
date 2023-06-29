@@ -1,6 +1,5 @@
 "use client";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 const LoginForm = () => {
@@ -13,7 +12,7 @@ const LoginForm = () => {
     event.preventDefault();
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    const response = await fetch("http://localhost:6000/auth/login", {
+    const response = await fetch("http://localhost:4000/auth/login", {
       method: "POST",
       body: JSON.stringify({ phone, password }),
       headers: myHeaders,
