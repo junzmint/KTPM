@@ -1,12 +1,13 @@
 "use client";
+import React from "react";
 import LogoutButton from "@/components/Logout";
-import React, { useState, useEffect } from "react";
 const Dashboard = () => {
   return (
     <>
-      <h1>LEADER</h1>
+      <h1>ACCOUNTANT</h1>
       <LogoutButton />
     </>
   );
 };
+
 export default Dashboard;

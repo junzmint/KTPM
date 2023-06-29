@@ -18,18 +18,24 @@ const LoginForm = () => {
       headers: myHeaders,
       redirect: "follow",
     });
+
     const data = await response.json();
     if (response.ok) {
       if (rememberMe) {
         localStorage.setItem("access_token", data.data.access_token);
         localStorage.setItem("refresh_token", data.data.refresh_token);
-        router.push("/leader");
       } else {
         sessionStorage.setItem("access_token", data.data.access_token);
         sessionStorage.setItem("refresh_token", data.data.refresh_token);
-        router.push("/leader");
       }
       // Redirect to the home page or the page the user was trying to access
+      const userRole = {
+        ADMIN: "/admin",
+        ACCOUNTANT: "/accountant",
+        LEADER: "/leader",
+      };
+      const role = data.data.role;
+      router.push(userRole[role]);
     } else {
       // Display an error message
       console.error(data.message);
@@ -67,7 +73,12 @@ const LoginForm = () => {
         />
       </label>
       <br />
-      <button type="submit">Login</button>
+      <button
+        type="submit"
+        className="p-2 bg-red-300 rounded-full hover:bg-red-500 text-center"
+      >
+        Login
+      </button>
     </form>
   );
 };
