@@ -19,8 +19,8 @@
 body {
   color: rgb(var(--foreground-rgb));
 }
-
+*/
 table, th, td{
     border: 1px solid black;
       border-collapse: collapse;
-} */
+} 

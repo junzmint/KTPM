@@ -1,9 +1,11 @@
 "use client";
 import LogoutButton from "@/components/Logout";
 import Link from "next/link";
+import Navbar from "@/components/navbar";
 import React, { useState, useEffect } from "react";
 const Dashboard = () => {
   const [user, setUser] = useState([]);
+  const [userRoles, setUserRoles] = useState({});
   useEffect(() => {
     (async () => {
       const token =
@@ -19,30 +21,38 @@ const Dashboard = () => {
         const data = await response.json();
         const userList = data.data.list;
         setUser(userList);
+        setUserRoles(localStorage.role);
       } catch (e) {
         console.error(e);
       }
     })();
   }, []);
+  const jobMenu = {
+    data: [
+      {
+        id: 1,
+        name: "Đăng kí",
+        path: "/admin/signup",
+        auth: userRoles,
+      },
+      {
+        id: 2,
+        name: "Người dùng",
+        path: "/admin",
+        auth: userRoles,
+      },
+    ],
+  };
   return (
     <React.Fragment>
       <div className="flex flex-row">
         <div className="flex flex-col w-[20%] bg-red-200">
-          <h2 className="text-lg">Admin</h2>
-          <div className="flex p-2 rounded hover:bg-red-300">
-            <Link href={"/admin"}>Dashboard</Link>
-          </div>
-          <div className="flex p-2 rounded hover:bg-red-300">
-            <Link href={"/admin/signup"}>Sign up</Link>
-          </div>
+          <Navbar data={jobMenu}></Navbar>
         </div>
         <div className="flex flex-col w-[80%] bg-blue-200">
           <div className="flex flex-row">
-            <div className="flex flex-col w-[90%]">
+            <div className="flex flex-col">
               <h2>Main content</h2>
-            </div>
-            <div className="flex flex-col w-[10%]">
-              <LogoutButton />
             </div>
           </div>
           <div className="bg-yellow-200">
