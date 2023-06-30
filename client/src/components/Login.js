@@ -24,24 +24,21 @@ const LoginForm = () => {
       if (rememberMe) {
         localStorage.setItem("access_token", data.data.access_token);
         localStorage.setItem("refresh_token", data.data.refresh_token);
+        localStorage.setItem("role", data.data.role);
+        const path =
+          sessionStorage.getItem("role") || localStorage.getItem("role");
+        router.push(`/${path.toLowerCase()}`);
       } else {
         sessionStorage.setItem("access_token", data.data.access_token);
         sessionStorage.setItem("refresh_token", data.data.refresh_token);
+        sessionStorage.setItem("role", data.data.role);
+        const path =
+          sessionStorage.getItem("role") || localStorage.getItem("role");
+        router.push(`/${path.toLowerCase()}`);
       }
       // Redirect to the home page or the page the user was trying to access
-      const userRole = {
-        ADMIN: "/admin",
-        ACCOUNTANT: "/accountant",
-        LEADER: "/leader",
-      };
-      const role = data.data.role;
-      router.push(userRole[role]);
-    } else {
-      // Display an error message
-      console.error(data.message);
     }
   };
-
   return (
     <form onSubmit={handleLogin}>
       <label>

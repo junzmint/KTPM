@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import LoginForm from "@/components/Login";
+import { useRouter } from "next/navigation";
 async function refreshAccessToken() {
   const refreshToken =
     localStorage.getItem("refresh_token") ||
@@ -30,7 +31,7 @@ async function refreshAccessToken() {
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  const router = useRouter();
   const checkAuthentication = async () => {
     const jwt =
       localStorage.getItem("access_token") ||
@@ -72,7 +73,13 @@ function App() {
       });
     }
   }, []);
-  return !isAuthenticated && <LoginForm />;
+  if(!isAuthenticated){
+    return <LoginForm/>;
+  }
+  else{
+    const path = sessionStorage.getItem("role") || localStorage.getItem("role");
+    router.push(`/${path.toLowerCase()}`);
+  }
 }
 
 export default App;
