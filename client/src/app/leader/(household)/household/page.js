@@ -28,7 +28,7 @@ function HouseHold() {
         })();
     }, []);
     const seeDetail = (id) => {
-        router.push(`./household/detail?${id}`)
+        router.push(`./household/${id}`)
     }
     return (
         <div className='flex'>
@@ -80,8 +80,7 @@ function HouseHold() {
                                             <BlueButton onClick={() => { seeDetail(unit._id) }} text="Xem"></BlueButton>
                                             <Link
                                                 href={{
-                                                    pathname: './household/detail',
-                                                    query: { id: `${unit._id}` },
+                                                    pathname: './household/detail'
                                                 }}
                                             >
                                                 <BlueButton text="Xoá"></BlueButton>
