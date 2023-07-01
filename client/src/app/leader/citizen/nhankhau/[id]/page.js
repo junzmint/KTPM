@@ -66,7 +66,7 @@ const Dashboard = ({ params }) => {
         <Navbar data={jobMenu} />
       </div>
       <div className="flex-auto w-4/5 bg-slate-100  h-full flex justify-center flex-col ">
-        <div className="ml-24 w-4/5 max-w-7xl h-2/3 p-2 mt-2 bg-white border-gray-200 rounded-lg shadow  ">
+        <div className="ml-24 w-4/5 max-w-7xl h-3/4 p-2 mt-2 bg-white border-gray-200 rounded-lg shadow">
           <div className="flex justify-end px-4 pt-4">
             <button
               id="dropdownButton"
@@ -86,14 +86,17 @@ const Dashboard = ({ params }) => {
               </svg>
             </button>
           </div>
-          <div className="flex flex-col items-center pb-5">
+          <div className="flex flex-col items-center pb-5 mb-3">
             <img
               className="w-36 h-36 mb-3 rounded-full shadow-lg"
               src="https://images.iphonephotographyschool.com/24762/560/portrait-photography.jpg"
               alt="Bonnie image"
             />
-            <span className="text-xl text-gray-500 dark:text-gray-400">
+            <span className="text-3xl">
               {citizenName.firstName} {citizenName.lastName}
+            </span>
+            <span className="text-md dark:text-gray-400">
+              {citizenDetail.gender}
             </span>
           </div>
           <div className="ml-4">
@@ -106,9 +109,9 @@ const Dashboard = ({ params }) => {
             <p>Tổ chức: {citizenDetail.workplace}</p>
             <p>Học vấn: {citizenDetail.education}</p>
           </div>
-          <div className="mt-4 flex justify-center items-center">
+          <div className="mt-10 flex justify-center items-center">
             <div className="flex">
-              <Link href={"leader/citizen/nhankhau" + citizenDetail._id +"/update"}>
+              <Link href={"/leader/citizen/nhankhau/" + citizenDetail._id + "/update"}>
                 <BlueButton text="Cập nhật"></BlueButton>
               </Link>
             </div>

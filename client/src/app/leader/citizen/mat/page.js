@@ -6,7 +6,7 @@ import Navbar from "@/components/navbar";
 import BlueButton from "@/components/button/blue-button";
 
 const Dashboard = () => {
-  const [stay, setStay] = useState([]);
+  const [death, setDeath] = useState([]);
   const [userRoles, setUserRoles] = useState({});
 
   useEffect(() => {
@@ -23,8 +23,8 @@ const Dashboard = () => {
         });
 
         const data = await response.json();
-        const stayList = data.data.list;
-        setStay(stayList);
+        const deathList = data.data.list;
+        setDeath(deathList);
 
         setUserRoles(localStorage.role);
       } catch (e) {
@@ -42,8 +42,8 @@ const Dashboard = () => {
       },
       {
         id: 2,
-        name: "stay",
-        path: "/leader/stay",
+        name: "death",
+        path: "/leader/death",
         auth: userRoles,
       },
       {
@@ -123,7 +123,7 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {stay.map((unit, index) => (
+              {death.map((unit, index) => (
                 <tr key={index} className="bg-gray-100 !border-none border-b">
                   <td className="text-sm text-gray-900 !border-none font-medium px-6 py-4 whitespace-nowrap">
                     {index + 1}
@@ -146,12 +146,12 @@ const Dashboard = () => {
                     <div className="flex">
                       <Link
                         href={{
-                          pathname: "stay/nhankhau/" + unit._id,
+                          pathname: "death/nhankhau/" + unit._id,
                         }}
                       >
                         <BlueButton text="Xem"></BlueButton>
                       </Link>
-                      <BlueButton text="Xóa"></BlueButton>
+                      <BlueButton onClick={() => { setDeath(death.splice(index - 1, 1)) }} text="Xóa"></BlueButton>
                     </div>
                   </td>
                 </tr>
