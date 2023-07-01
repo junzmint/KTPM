@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Navbar from "@/components/navbar";
-const Dashboard = () => {
+const Transaction = () => {
   const jobMenu = {
     data: [
       {
@@ -28,11 +28,10 @@ const Dashboard = () => {
           <Navbar data={jobMenu}></Navbar>
         </div>
         <div className="flex flex-col w-[80%] bg-blue-200">
-           <h1>Dashboard</h1>
+           <h1>Transaction</h1>
         </div>
       </div>
     </React.Fragment>
   );
 };
-
-export default Dashboard;
+export default Transaction;
