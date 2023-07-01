@@ -2,7 +2,6 @@
 
 const InputField = ({ data, handleChange }) => {
   const { type, id, value, name, placeHolder, label } = data;
-
   return (
     <div>
       <label for={id} className="px-4">

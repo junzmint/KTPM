@@ -9,6 +9,8 @@ const SignUp = () => {
     role: "",
   };
   const [user, setUser] = useState(defaultValue);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const handleChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -36,11 +38,32 @@ const SignUp = () => {
     label: "Mật khẩu",
   };
 
-  const [role, setRole] = useState(["ACCOUNTANT", "ADMIN", "LEADER"]);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
+    const token =
+      localStorage.getItem("access_token") ||
+      sessionStorage.getItem("access_token");
+    const response = await fetch("http://localhost:4000/user/create_user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(user),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setIsSuccess(true);
+      setSuccessMessage(data.message);
+      setUser(defaultValue);
+    } else {
+      const data = await response.json();
+      setIsSuccess(true);
+      setSuccessMessage(data.error.message);
+      setUser(defaultValue);
+    }
   };
+
   return (
     <>
       <div className="flex flex-col align-center">
@@ -52,18 +75,35 @@ const SignUp = () => {
             <InputField data={password} handleChange={handleChange} />
           </div>
           <div>
-            <label for="role">Role</label>
-            {role.map((item) => (
-              <RadioButton
-                data={{
-                  id: item,
-                  name: "role",
-                  value: item,
-                  checkValue: item,
-                }}
-                handleChange={handleChange}
-              />
-            ))}
+            <div className="px-4">Role</div>
+
+            <input
+              className="mx-4"
+              type="radio"
+              id="ADMIN"
+              name="role"
+              value="ADMIN"
+              onChange={handleChange}
+            ></input>
+            <label for="role">ADMIN</label>
+            <input
+              className="mx-4"
+              type="radio"
+              id="LEADER"
+              name="role"
+              value="LEADER"
+              onChange={handleChange}
+            ></input>
+            <label for="role">LEADER</label>
+            <input
+              className="mx-4"
+              type="radio"
+              id="ACCOUNTANT"
+              name="role"
+              value="ACCOUNTANT"
+              onChange={handleChange}
+            ></input>
+            <label for="role">ACCOUNTANT</label>
           </div>
           <button type="submit" className="p-5 bg-red-200 hover:bg-red-400">
             Register
@@ -71,6 +111,7 @@ const SignUp = () => {
         </form>
       </div>
       <LogoutButton />
+      {isSuccess && <div>{successMessage}</div>}
     </>
   );
 };
