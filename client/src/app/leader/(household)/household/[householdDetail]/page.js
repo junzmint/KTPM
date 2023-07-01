@@ -3,6 +3,8 @@
 import BlueButton from '@/components/button/blue-button';
 import Navbar from '@/components/navbar';
 import Image from 'next/legacy/image';
+import RemoveModal from '@/components/removehouseholdmodal';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 function HouseholdDetailPage({ params }) {
@@ -11,7 +13,9 @@ function HouseholdDetailPage({ params }) {
     const [address, setAddress] = useState({});
     const [moveIn, setMoveIn] = useState({});
     const [members, setMembers] = useState([]);
+    const [ownerId, setOwnerId] = useState();
     const [userRoles, setUserRoles] = useState({});
+    const [isOpen, setIsOpen] = useState(false)
     useEffect(() => {
         (async () => {
             const token =
@@ -31,6 +35,7 @@ function HouseholdDetailPage({ params }) {
                 setAddress(data.data.household.address)
                 setMoveIn(data.data.household.move_in)
                 setMembers(data.data.household.members)
+                setOwnerId(data.data.household.owner_id)
             } catch (e) {
                 console.error(e);
             }
@@ -100,14 +105,13 @@ function HouseholdDetailPage({ params }) {
                                     </th>
                                     <th scope="col" colSpan="3" className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left">
                                         Mối quan hệ
-                                        {console.log(members)}
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                     members.map((mem, index) => (
-                                        <tr className="bg-white border-b">
+                                        <tr key={index} className="bg-white border-b">
                                             <th scope="col" className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left">
                                                 {mem.citizen_id.name.firstName + " " + mem.citizen_id.name.lastName}
                                             </th>
@@ -115,7 +119,10 @@ function HouseholdDetailPage({ params }) {
                                                 {mem.relation}
                                             </th>
                                             <th scope="col" colSpan="2" className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left flex justify-end">
-                                                <BlueButton text="Xem"></BlueButton>
+                                                <Link href={"/leader/citizen/nhankhau/" + mem.citizen_id._id}>
+                                                    <BlueButton text="Xem"></BlueButton>
+                                                </Link>
+                                                <RemoveModal></RemoveModal>
                                             </th>
                                         </tr>
                                     ))
