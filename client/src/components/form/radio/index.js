@@ -2,7 +2,6 @@
 import React from "react";
 const RadioButton = ({ data, handleChange }) => {
   const { id, value, name, checkValue } = data;
-
   return (
     <>
       <input
@@ -11,10 +10,9 @@ const RadioButton = ({ data, handleChange }) => {
         id={id}
         name={name}
         value={value}
-        checked={value === checkValue}
         onChange={handleChange}
       ></input>
-      {checkValue}
+      <label for={value}>{checkValue}</label>
     </>
   );
 };
