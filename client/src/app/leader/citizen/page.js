@@ -68,12 +68,12 @@ const Dashboard = () => {
             Tạm trú
           </button>
         </Link>
-        <Link href="leader/citizen/tamvang">
+        <Link href="/leader/citizen/tamvang">
           <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full p-10 mr-2">
             Tạm vắng
           </button>
         </Link>
-        <Link href="leader/citizen/mat">
+        <Link href="/leader/citizen/mat">
           <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full p-10 mr-2">
             Xanh cỏ
           </button>
