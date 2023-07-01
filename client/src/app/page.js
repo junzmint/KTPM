@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import LoginForm from "@/components/Login";
+import LoginForm from "@/components/auth/Login";
 import { useRouter } from "next/navigation";
 async function refreshAccessToken() {
   const refreshToken =
@@ -73,10 +73,9 @@ function App() {
       });
     }
   }, []);
-  if(!isAuthenticated){
-    return <LoginForm/>;
-  }
-  else{
+  if (!isAuthenticated) {
+    return <LoginForm />;
+  } else {
     const path = sessionStorage.getItem("role") || localStorage.getItem("role");
     router.push(`/${path.toLowerCase()}`);
   }
