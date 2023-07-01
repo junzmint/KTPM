@@ -1,5 +1,5 @@
 "use client";
-import LogoutButton from "../Logout";
+import LogoutButton from "@/components/auth/Logout";
 import Menus from "./menus";
 const Navbar = ({ data }) => {
   return (

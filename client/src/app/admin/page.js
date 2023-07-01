@@ -1,6 +1,4 @@
 "use client";
-import LogoutButton from "@/components/Logout";
-import Link from "next/link";
 import Navbar from "@/components/navbar";
 import React, { useState, useEffect } from "react";
 const Dashboard = () => {
