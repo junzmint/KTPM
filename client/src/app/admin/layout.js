@@ -10,7 +10,7 @@ export default function Layout({ children }) {
     data: [
       {
         id: 1,
-        name: "Đăng kí",
+        name: "Tạo người dùng mới",
         path: "/admin/signup",
         auth: userRoles,
       },
@@ -23,11 +23,11 @@ export default function Layout({ children }) {
     ],
   };
   return (
-    <div className="flex flex-row">
-      <div className="flex flex-col w-[20%] bg-red-200">
+    <div className="flex flex-row h-screen">
+      <div className="flex-auto w-1/5 bg-slate-500">
         <Navbar data={jobMenu} />
       </div>
-      <div className="flex flex-col w-[80%] bg-blue-200">{children}</div>
+      <div className="flex-auto w-4/5 justify-center">{children}</div>
     </div>
   );
 }
