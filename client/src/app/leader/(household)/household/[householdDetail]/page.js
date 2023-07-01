@@ -9,6 +9,7 @@ function HouseholdDetailPage({ params }) {
     const [name, setName] = useState();
     const [address, setAddress] = useState({});
     const [moveIn, setMoveIn] = useState({});
+    const [members, setMembers] = useState([]);
     console.log(params)
     useEffect(() => {
         (async () => {
@@ -28,6 +29,7 @@ function HouseholdDetailPage({ params }) {
                 setHousehold(data.data.household)
                 setAddress(data.data.household.address)
                 setMoveIn(data.data.household.move_in)
+                setMembers(data.data.household.members)
             } catch (e) {
                 console.error(e);
             }
@@ -39,8 +41,8 @@ function HouseholdDetailPage({ params }) {
             <div className="flex-auto w-1/5 bg-orange-700 h-screen">
                 navbar
             </div>
-            <div className="flex-auto w-4/5 bg-slate-100 h-screen overflow-y-scroll flex justify-center flex-col">
-                <div className="ml-36 w-full max-w-7xl h-1/2 p-2 mt-24 bg-white border-gray-200 rounded-lg shadow ">
+            <div className="flex-auto w-4/5 bg-slate-100 h-screen flex justify-center flex-col">
+                <div className="ml-28 w-4/5 max-w-7xl h-3/4 p-2 mt-24 bg-white border-gray-200 rounded-lg shadow ">
                     <div className="flex justify-end px-4 pt-4">
                         <button id="dropdownButton" data-dropdown-toggle="dropdown" className="inline-block text-gray-500 hover:bg-gray-100 fo0 rounded-lg text-sm p-1.5" type="button">
                             <span className="sr-only">Open dropdown</span>
@@ -52,7 +54,7 @@ function HouseholdDetailPage({ params }) {
                         <h5 className="mb-1 text-xl font-medium text-gray-900">{name}</h5>
                         <span className="text-sm text-gray-500 dark:text-gray-400">Chủ hộ</span>
                     </div>
-                    <div className='ml-4'>
+                    <div className='ml-10'>
                         <p>Mã hộ: {household.household_id}</p>
                         <p>Địa chỉ: {address.no + ", " + address.ward + ", " + address.district + ", " + address.province}</p>
                         <p>Mã khu vực: {household.areaCode}</p>
@@ -65,8 +67,36 @@ function HouseholdDetailPage({ params }) {
                         </div>
                     </div>
                 </div>
-                <div className="ml-36 mb-16 w-full max-w-7xl h-96 p-2 mt-24 bg-white border-gray-200 rounded-lg shadow">
-                    helo
+                <div className="ml-28 mb-16 w-4/5 max-w-7xl h-96 p-2 mt-24 bg-white border-gray-200 rounded-lg shadow">
+                    <div>
+                        <table className="flex-auto !border-none	 min-w-full drop-shadow-md mt-12">
+                            <thead className="bg-white border-b">
+                                <tr className="bg-gray-100 border-b">
+                                    <th scope="col" className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left">
+                                        Tên
+                                    </th>
+                                    <th scope="col" colSpan="3" className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left">
+                                        Mối quan hệ
+                                    </th>
+                                </tr>
+                                {members.map((mem, index) => (
+                                    <tr className="bg-white border-b">
+                                        <th scope="col" className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left">
+                                            {mem[index].name.firstName}
+                                        </th>
+                                        <th scope="col" colSpan="2" className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left">
+                                            Chủ hộ
+                                        </th>
+                                        <th scope="col" colSpan="2" className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left flex justify-end">
+                                        </th>
+                                    </tr>
+                                ))
+                                }
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
