@@ -1,11 +1,13 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import BlueButton from '@/components/button/blue-button';
+import Navbar from '@/components/navbar';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 function HouseHold() {
     const [households, setHouseholds] = useState([]);
+    const [userRoles, setUserRoles] = useState({});
     const router = useRouter();
     useEffect(() => {
         (async () => {
@@ -20,20 +22,49 @@ function HouseHold() {
                     },
                 });
                 const data = await response.json();
-                console.log(data.data.list);
                 setHouseholds(data.data.list)
             } catch (e) {
                 console.error(e);
             }
         })();
     }, []);
+
+    const jobMenu = {
+        data: [
+            {
+                id: 1,
+                name: "Dashboard",
+                path: "/leader",
+                auth: userRoles,
+            },
+            {
+                id: 2,
+                name: "Citizen",
+                path: "/leader/citizen",
+                auth: userRoles,
+            },
+            {
+                id: 3,
+                name: "Household",
+                path: "/leader/household",
+                auth: userRoles,
+            },
+        ],
+    };
+
     const seeDetail = (id) => {
         router.push(`./household/${id}`)
     }
+
+    const handleDelete = (id) => {
+        households.splice(id, 1); // 2nd parameter means remove one item only
+
+        setHouseholds(households => households);
+    }
     return (
         <div className='flex'>
-            <div className="flex-auto w-1/5 bg-orange-700 h-screen">
-                navbar
+            <div className="flex-auto w-1/5 bg-slate-500 h-screen">
+                <Navbar data={jobMenu} />
             </div>
             <div className='flex w-4/5 bg-blue  justify-center'>
                 <div className="overflow-x-auto rounded drop-shadow-md stroke-1 w-2/3">
@@ -47,7 +78,9 @@ function HouseHold() {
 
                                 </th>
                                 <th scope="col" className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left flex justify-end">
-                                    <BlueButton text="Tạo"></BlueButton>
+                                    <Link href='../../leader/addnewhousehold'>
+                                        <BlueButton text="Tạo"></BlueButton>
+                                    </Link>
                                 </th>
                             </tr>
                             <tr className="bg-white border-b">
@@ -83,8 +116,8 @@ function HouseHold() {
                                                     pathname: './household/detail',
                                                 }}
                                             >
-                                                <BlueButton text="Xoá"></BlueButton>
                                             </Link>
+                                            <BlueButton onClick={() => { setHouseholds(households.splice(index - 1, 1)) }} text="Xoá"></BlueButton>
                                         </div>
                                     </td>
                                 </tr>
