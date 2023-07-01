@@ -1,6 +1,7 @@
 "use client"
 
 import BlueButton from '@/components/button/blue-button';
+import Navbar from '@/components/navbar';
 import Image from 'next/legacy/image';
 import React, { useEffect, useState } from 'react'
 
@@ -10,7 +11,7 @@ function HouseholdDetailPage({ params }) {
     const [address, setAddress] = useState({});
     const [moveIn, setMoveIn] = useState({});
     const [members, setMembers] = useState([]);
-    console.log(params)
+    const [userRoles, setUserRoles] = useState({});
     useEffect(() => {
         (async () => {
             const token =
@@ -36,10 +37,32 @@ function HouseholdDetailPage({ params }) {
         })();
     }, []);
 
+    const jobMenu = {
+        data: [
+            {
+                id: 1,
+                name: "Dashboard",
+                path: "/leader",
+                auth: userRoles,
+            },
+            {
+                id: 2,
+                name: "Citizen",
+                path: "/leader/citizen",
+                auth: userRoles,
+            },
+            {
+                id: 3,
+                name: "Household",
+                path: "/leader/household",
+                auth: userRoles,
+            },
+        ],
+    };
     return (
-        <div className='flex'>
-            <div className="flex-auto w-1/5 bg-orange-700 h-screen">
-                navbar
+        <div className='flex h-screen'>
+            <div className="flex-auto w-1/5 bg-slate-500 h-screen ">
+                <Navbar data={jobMenu} />
             </div>
             <div className="flex-auto w-4/5 bg-slate-100 h-screen flex justify-center flex-col">
                 <div className="ml-28 w-4/5 max-w-7xl h-3/4 p-2 mt-24 bg-white border-gray-200 rounded-lg shadow ">
@@ -67,9 +90,9 @@ function HouseholdDetailPage({ params }) {
                         </div>
                     </div>
                 </div>
-                <div className="ml-28 mb-16 w-4/5 max-w-7xl h-96 p-2 mt-24 bg-white border-gray-200 rounded-lg shadow">
-                    <div>
-                        <table className="flex-auto !border-none	 min-w-full drop-shadow-md mt-12">
+                <div className="ml-28 mb-16 w-4/5 max-w-7xl h-screen p-2 mt-5 bg-white border-gray-200 rounded-lg shadow">
+                    <div className='p-10'>
+                        <table className="flex-auto !border-none min-w-full drop-shadow-md mt-5">
                             <thead className="bg-white border-b">
                                 <tr className="bg-gray-100 border-b">
                                     <th scope="col" className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left">
@@ -77,20 +100,23 @@ function HouseholdDetailPage({ params }) {
                                     </th>
                                     <th scope="col" colSpan="3" className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left">
                                         Mối quan hệ
+                                        {console.log(members)}
                                     </th>
                                 </tr>
-                                {members.map((mem, index) => (
-                                    <tr className="bg-white border-b">
-                                        <th scope="col" className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left">
-                                            {mem[index].name.firstName}
-                                        </th>
-                                        <th scope="col" colSpan="2" className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left">
-                                            Chủ hộ
-                                        </th>
-                                        <th scope="col" colSpan="2" className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left flex justify-end">
-                                        </th>
-                                    </tr>
-                                ))
+                                {
+                                    members.map((mem, index) => (
+                                        <tr className="bg-white border-b">
+                                            <th scope="col" className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left">
+                                                {mem.citizen_id.name.firstName + " " + mem.citizen_id.name.lastName}
+                                            </th>
+                                            <th scope="col" colSpan="2" className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left">
+                                                {mem.relation}
+                                            </th>
+                                            <th scope="col" colSpan="2" className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left flex justify-end">
+                                                <BlueButton text="Xem"></BlueButton>
+                                            </th>
+                                        </tr>
+                                    ))
                                 }
                             </thead>
                             <tbody>
@@ -99,7 +125,7 @@ function HouseholdDetailPage({ params }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
