@@ -10,6 +10,7 @@ const UpdateHouseHold = ({ params }) => {
     const [name, setName] = useState();
     const [address, setAddress] = useState({});
     const [moveIn, setMoveIn] = useState({});
+    const [ownerId, setOwnerId] = useState({});
     const [members, setMembers] = useState([]);
     useEffect(() => {
         (async () => {
@@ -42,6 +43,16 @@ const UpdateHouseHold = ({ params }) => {
         const value = e.target.value;
         setName(value);
     };
+    const handleAddressChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setAddress({ ...address, [name]: value });
+    };
+    const handleMoveInChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setMoveIn({ ...moveIn, [name]: value })
+    }
     const jobMenu = {
         data: [
             {
@@ -103,8 +114,9 @@ const UpdateHouseHold = ({ params }) => {
                             <input
                                 type="text"
                                 className="block border border-grey-light w-full p-3 rounded mb-4"
-                                name="Số nhà"
+                                name="no"
                                 value={address.no}
+                                onChange={handleAddressChange}
                                 placeholder="Số nhà"
                             />
                             <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -113,8 +125,9 @@ const UpdateHouseHold = ({ params }) => {
                             <input
                                 type="text"
                                 className="block border border-grey-light w-full p-3 rounded mb-4"
-                                name="Ngày chuyển đến"
+                                name="date"
                                 value={moveIn.date}
+                                onChange={handleMoveInChange}
                                 placeholder="Ngày chuyển đến"
                             />
                             <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -125,6 +138,7 @@ const UpdateHouseHold = ({ params }) => {
                                 className="block border border-grey-light w-full p-3 rounded mb-4"
                                 name="Lý do"
                                 value={moveIn.reason == "" ? "Chưa có" : moveIn.reason}
+                                onChange={handleMoveInChange}
                                 placeholder="Lý do"
                             />
                         </div>
@@ -145,9 +159,10 @@ const UpdateHouseHold = ({ params }) => {
                             <input
                                 type="text"
                                 className="block border border-grey-light w-full p-3 rounded mb-4"
-                                name="Phường"
+                                name="ward"
                                 value={address.ward}
-                                placeholder="Phường"
+                                onChange={handleAddressChange}
+                                placeholder="ward"
                             />
                             <label class="block text-gray-700 text-sm font-bold mb-2">
                                 Quận
@@ -155,8 +170,9 @@ const UpdateHouseHold = ({ params }) => {
                             <input
                                 type="text"
                                 className="block border border-grey-light w-full p-3 rounded mb-4"
-                                name="Quận"
+                                name="district"
                                 value={address.district}
+                                onChange={handleAddressChange}
                                 placeholder="Quận"
                             />
                             <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -166,6 +182,7 @@ const UpdateHouseHold = ({ params }) => {
                                 type="text"
                                 className="block border border-grey-light w-full p-3 rounded mb-4"
                                 name="province"
+                                onChange={handleAddressChange}
                                 value={address.province}
                                 placeholder="Huyện"
                             />
