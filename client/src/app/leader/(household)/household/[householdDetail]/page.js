@@ -60,11 +60,11 @@ function HouseholdDetailPage({ params }) {
         ],
     };
     return (
-        <div className='flex h-screen'>
-            <div className="flex-auto w-1/5 bg-slate-500 h-screen ">
+        <div className='flex  h-full'>
+            <div className="flex-auto w-1/5 bg-slate-500 ">
                 <Navbar data={jobMenu} />
             </div>
-            <div className="flex-auto w-4/5 bg-slate-100 h-screen flex justify-center flex-col">
+            <div className="flex-auto w-4/5 bg-slate-100  h-full flex justify-center flex-col">
                 <div className="ml-28 w-4/5 max-w-7xl h-3/4 p-2 mt-24 bg-white border-gray-200 rounded-lg shadow ">
                     <div className="flex justify-end px-4 pt-4">
                         <button id="dropdownButton" data-dropdown-toggle="dropdown" className="inline-block text-gray-500 hover:bg-gray-100 fo0 rounded-lg text-sm p-1.5" type="button">
@@ -90,7 +90,7 @@ function HouseholdDetailPage({ params }) {
                         </div>
                     </div>
                 </div>
-                <div className="ml-28 mb-16 w-4/5 max-w-7xl h-screen p-2 mt-5 bg-white border-gray-200 rounded-lg shadow">
+                <div className="ml-28 mb-16 w-4/5 max-w-7xl h-full p-2 mt-5 bg-white border-gray-200 rounded-lg shadow">
                     <div className='p-10'>
                         <table className="flex-auto !border-none min-w-full drop-shadow-md mt-5">
                             <thead className="bg-white border-b">
@@ -103,6 +103,8 @@ function HouseholdDetailPage({ params }) {
                                         {console.log(members)}
                                     </th>
                                 </tr>
+                            </thead>
+                            <tbody>
                                 {
                                     members.map((mem, index) => (
                                         <tr className="bg-white border-b">
@@ -118,10 +120,13 @@ function HouseholdDetailPage({ params }) {
                                         </tr>
                                     ))
                                 }
-                            </thead>
-                            <tbody>
                             </tbody>
                         </table>
+                    </div>
+                    <div className='flex justify-center items-center'>
+                        <div className='flex'>
+                            <BlueButton text="Thêm thành viên"></BlueButton>
+                        </div>
                     </div>
                 </div>
             </div>
