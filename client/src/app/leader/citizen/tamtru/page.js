@@ -156,7 +156,7 @@ const Dashboard = () => {
                       >
                         <BlueButton text="Xem"></BlueButton>
                       </Link>
-                      <BlueButton text="Xóa"></BlueButton>
+                      <BlueButton onClick={() => { setStay(stay.splice(index - 1, 1)) }} text="Xóa"></BlueButton>
                     </div>
                   </td>
                 </tr>
