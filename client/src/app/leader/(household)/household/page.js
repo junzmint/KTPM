@@ -37,27 +37,27 @@ function HouseHold() {
             </div>
             <div className='flex w-4/5 bg-blue  justify-center'>
                 <div className="overflow-x-auto rounded drop-shadow-md stroke-1 w-2/3">
-                    <table className="flex-auto min-w-full drop-shadow-md mt-40">
+                    <table className="flex-auto !border-none	 min-w-full drop-shadow-md mt-40">
                         <thead className="bg-white border-b">
                             <tr className="bg-gray-100 border-b">
-                                <th scope="col" colSpan="3" className="text-lg font-medium text-gray-900 px-6 py-4 text-left">
+                                <th scope="col" colSpan="3" className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left">
                                     Danh sách các hộ gia đình
                                 </th>
-                                <th scope="col" className="text-lg font-medium text-gray-900 px-6 py-4 text-left">
+                                <th scope="col" className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left">
 
                                 </th>
-                                <th scope="col" className="text-lg font-medium text-gray-900 px-6 py-4 text-left flex justify-end">
+                                <th scope="col" className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left flex justify-end">
                                     <BlueButton text="Tạo"></BlueButton>
                                 </th>
                             </tr>
                             <tr className="bg-white border-b">
-                                <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                <th scope="col" className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left">
                                     Số thứ tự
                                 </th>
-                                <th scope="col" colSpan="2" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                <th scope="col" colSpan="2" className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left">
                                     Chủ hộ
                                 </th>
-                                <th scope="col" colSpan="2" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                <th scope="col" colSpan="2" className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left">
                                     Mã hộ
                                 </th>
 
@@ -65,22 +65,22 @@ function HouseHold() {
                         </thead>
                         <tbody>
                             {households.map((unit, index) => (
-                                <tr key={index} className="bg-gray-100 border-b">
-                                    <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                <tr key={index} className="bg-gray-100 !border-none border-b">
+                                    <td className="text-sm text-gray-900 !border-none font-medium px-6 py-4 whitespace-nowrap">
                                         {index + 1}
                                     </td>
-                                    <td colSpan="2" className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                    <td colSpan="2" className="text-sm text-gray-900 !border-none font-medium px-6 py-4 whitespace-nowrap">
                                         {unit.owner_id.name.firstName + " " + unit.owner_id.name.lastName}
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{unit.household_id}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm !border-none font-medium text-gray-900">{unit.household_id}</td>
 
-                                    <td colSpan="3" className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap flex justify-end">
+                                    <td colSpan="3" className="text-sm text-gray-900 !border-none font-medium px-6 py-4 whitespace-nowrap flex justify-end">
                                         <div className="flex">
 
                                             <BlueButton onClick={() => { seeDetail(unit._id) }} text="Xem"></BlueButton>
                                             <Link
                                                 href={{
-                                                    pathname: './household/detail'
+                                                    pathname: './household/detail',
                                                 }}
                                             >
                                                 <BlueButton text="Xoá"></BlueButton>
