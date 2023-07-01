@@ -58,7 +58,7 @@ const Dashboard = () => {
       {
         id: 3,
         name: "Household",
-        path: "/leader",
+        path: "/leader/household",
         auth: userRoles,
       },
     ],
