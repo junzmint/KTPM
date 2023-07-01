@@ -91,7 +91,7 @@ function HouseholdDetailPage({ params }) {
                     </div>
                     <div className='mt-8 flex justify-center items-center'>
                         <div className='flex'>
-                            <Link href="../../../leader/updatehousehold">
+                            <Link href={"../../../leader/updatehousehold/" + household._id}>
                                 <BlueButton text="Cập nhật"></BlueButton>
                             </Link>
                         </div>
