@@ -57,6 +57,15 @@ exports.createHousehold = async ({
   });
 
   const newHousehold = await household.save();
+  const citizens = newHousehold.members;
+
+  for (let i = 0; i < citizens.length; i++) {
+    const citizen_id = citizens[i].citizen_id;
+    const citizen = await Citizen.findById(citizen_id);
+    citizen.household_id = newHousehold.id;
+    await citizen.save();
+  }
+
   if (newHousehold !== household) {
     const err = new Error('Failed to connect with database.');
     err.statusCode = 500;
