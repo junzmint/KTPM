@@ -68,12 +68,12 @@ const Dashboard = () => {
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full p-10 mt-16 mr-2">
           Tạm trú
         </button>
-        <Link href="leader/citizen/tamvang">
+        <Link href="/leader/citizen/tamvang">
           <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full p-10 mr-2">
             Tạm vắng
           </button>
         </Link>
-        <Link href="leader/citizen/mat">
+        <Link href="/leader/citizen/mat">
           <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full p-10 mr-2">
             Xanh cỏ
           </button>
@@ -89,10 +89,7 @@ const Dashboard = () => {
                 >
                   Danh sách nhân khẩu
                 </th>
-                {/* <th
-                  scope="col"
-                  className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left"
-                ></th> */}
+
                 <th
                   scope="col"
                   className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left flex justify-end"
