@@ -39,16 +39,6 @@ const CreateNewForm = (params) => {
       }
     })();
   }, []);
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setCitizen({ ...citizen, [name]: value });
-  };
-  const handleChangeName = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setCitizenName({ ...citizenName, [name]: value });
-  };
   const jobMenu = {
     data: [
       {
@@ -77,9 +67,9 @@ const CreateNewForm = (params) => {
         <Navbar data={jobMenu} />
       </div>
       <div className="flex w-4/5 bg-slate-100  justify-center">
-        <div className="bg-white mt-24 ml-8 mb-8 mr-8 px-6 py-8 rounded shadow-md text-black w-full">
+        <div className="bg-white mt-24 ml-8 mb-24 mr-8 px-6 py-8 rounded-xl shadow-md text-black w-full">
           <h1 className="mb-2 text-4xl font-bold text-center">
-            Cập nhật tạm trú
+            Xem tạm trú
           </h1>
           <h3 className="mb-12 text-xl font-bold text-center text-slate-600">
             {citizenName.firstName} {citizenName.lastName}
@@ -99,51 +89,31 @@ const CreateNewForm = (params) => {
             <div className="flex space-x-12">
               <div className="mr-8 w-full">
                 <label class="block text-gray-700 text-sm font-bold mb-2">
-                  Ma
+                  Giới tính
                 </label>
-                <input
-                  type="text"
+                <label
                   class="block border border-grey-light w-full p-3 rounded mb-4"
-                  name="dob"
-                  placeholder="Ngay sinh"
-                  value={citizen._id}
-                  onChange={handleChange}
-                />
+                >{citizen.gender}</label>
                 <label class="block text-gray-700 text-sm font-bold mb-2">
                   From
                 </label>
-                <input
-                  type="text"
+                <label
                   class="block border border-grey-light w-full p-3 rounded mb-4"
-                  name="hometown"
-                  placeholder="From"
-                  value={citizenDate.from}
-                  onChange={handleChange}
-                />
+                >{citizenDate.from}</label>
               </div>
               <div className="w-full">
                 <label class="block text-gray-700 text-sm font-bold mb-2">
                   Dia chi
                 </label>
-                <input
-                  type="text"
+                <label
                   class="block border border-grey-light w-full p-3 rounded mb-4"
-                  name="gender"
-                  placeholder="Dia chi"
-                  value={citizen.accommodation}
-                  onChange={handleChange}
-                />
+                >{citizen.accommodation}</label>
                 <label class="block text-gray-700 text-sm font-bold mb-2">
                   To
                 </label>
-                <input
-                  type="text"
+                <label
                   class="block border border-grey-light w-full p-3 rounded mb-4"
-                  name="to"
-                  placeholder="To"
-                  value={citizenDate.to}
-                  onChange={handleChange}
-                />
+                >{citizenDate.to}</label>
               </div>
             </div>
             <label
@@ -152,19 +122,13 @@ const CreateNewForm = (params) => {
               Ly do
             </label>
             <div className="w-full">
-              <input
-                type="text"
-                className="block border border-grey-light w-full p-3 rounded mb-4"
-                name="name"
-                placeholder="Ly do"
-                value={citizenReason}
-                onChange={handleChange}
-              />
+            <label
+                  class="block border border-grey-light w-full p-3 rounded mb-4"
+                >{citizenReason}</label>
             </div>
           </div>
-          <div className="flex items-center w-full"></div>
           <div class="text-center text-sm text-grey-dark mt-4">
-            <BlueButton text="Cập nhật"></BlueButton>
+            {/* <BlueButton text="Cập nhật"></BlueButton> */}
           </div>
         </div>
       </div>

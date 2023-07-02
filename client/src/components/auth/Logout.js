@@ -30,8 +30,8 @@ const LogoutButton = () => {
   };
 
   return (
-    <div className="p-2 text-center bg-red-300 rounded-full hover:bg-red-500 mt-[80vh]">
-      <button onClick={handleLogout}>Logout</button>
+    <div className="p-5 text-center bg-red-500 hover:bg-red-400 items-center content-center">
+      <button className="text-xl" onClick={handleLogout}>Logout</button>
     </div>
   );
 };

@@ -143,15 +143,15 @@ const Dashboard = () => {
                     colSpan="4"
                     className="text-sm text-gray-900 !border-none font-medium py-4 pxgi-6 whitespace-nowrap flex justify-end"
                   >
-                    <div className="flex">
+                    <div className="flex mr-">
                       <Link
                         href={{
-                          pathname: "death/nhankhau/" + unit._id,
+                          pathname: "nhankhau/" + unit.citizen_id._id,
                         }}
                       >
                         <BlueButton text="Xem"></BlueButton>
                       </Link>
-                      <BlueButton onClick={() => { setDeath(death.splice(index - 1, 1)) }} text="Xóa"></BlueButton>
+                      {/* <BlueButton onClick={() => { setDeath(death.splice(index - 1, 1)) }} text="Xóa"></BlueButton> */}
                     </div>
                   </td>
                 </tr>

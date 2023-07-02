@@ -5,50 +5,15 @@ import BlueButton from "@/components/button/blue-button";
 
 const CreateNewForm = () => {
   const [citizen, setCitizen] = useState([]);
-  const [citizenName, setCitizenName] = useState([]);
-  const [citizenDate, setCitizenDate] = useState([]);
   const [citizenReason, setCitizenReason] = useState([]);
   const [userRoles, setUserRoles] = useState({});
 
-  //   useEffect(() => {
-  //     (async () => {
-  //       const token =
-  //         localStorage.getItem("access_token") ||
-  //         sessionStorage.getItem("access_token");
-  //       try {
-  //         const response = await fetch(
-  //           `http://localhost:4000/stay/detail/${params.params.id}`,
-  //           {
-  //             method: "GET",
-  //             headers: {
-  //               Authorization: `Bearer ${token}`,
-  //             },
-  //           }
-  //         );
-
-  //         const data = await response.json();
-  //         const citizen = data.data.stay;
-  //         setCitizen(citizen.citizen_id);
-  //         setCitizenName(citizen.citizen_id.name);
-  //         setCitizenDate(citizen.date);
-  //         setCitizenReason(citizen.reason);
-
-  //         setUserRoles(localStorage.role);
-  //       } catch (e) {
-  //         console.error(e);
-  //       }
-  //     })();
-  //   }, []);
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setCitizen({ ...citizen, [name]: value });
   };
-  const handleChangeName = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setCitizenName({ ...citizenName, [name]: value });
-  };
+
   const jobMenu = {
     data: [
       {
