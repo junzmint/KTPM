@@ -3,56 +3,88 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '@/components/navbar';
 import BlueButton from '@/components/button/blue-button';
 
-const UpdateHouseHold = ({ params }) => {
+
+const AddNewMember = ({ params }) => {
     const [showModal, setShowModal] = React.useState(false);
     const [userRoles, setUserRoles] = useState({});
     const [household, setHousehold] = useState({});
+    const [citizenID, setCitizenID] = useState("");
+    const [relation, setRelation] = useState("");
+    const [citizen, setCitizen] = useState({ citizen_id: citizenID, relation });
     const [name, setName] = useState();
-    const [address, setAddress] = useState({});
-    const [moveIn, setMoveIn] = useState({});
-    const [ownerId, setOwnerId] = useState({});
-    const [members, setMembers] = useState([]);
+    const [cccd, setCccd] = useState("");
     useEffect(() => {
         (async () => {
             const token =
                 localStorage.getItem("access_token") ||
                 sessionStorage.getItem("access_token");
             try {
-                const response = await fetch(`http://localhost:4000/household/profile/${params.id}`, {
+                const response = await fetch(`http://localhost:4000/household/profile/${params.household_id}`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${token}`
                     },
                 });
                 const data = await response.json();
-                console.log(data.data.household);
+                console.log(data.data.household, "hel");
+                setHousehold(data.data.household)
                 setName(data.data.household.members[0].citizen_id.name.firstName
                     + " " + data.data.household.members[0].citizen_id.name.lastName)
-                setHousehold(data.data.household)
-                setAddress(data.data.household.address)
-                setMoveIn(data.data.household.move_in)
-                setMembers(data.data.household.members)
-                setOwnerId(data.data.household.owner_id)
             } catch (e) {
                 console.error(e);
             }
         })();
     }, []);
-    const handleNameChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setName(value);
+    const handleAddNewMember = async () => {
+        citizen.citizen_id = citizenID
+        const token =
+            localStorage.getItem('access_token') ||
+            sessionStorage.getItem('access_token');
+        try {
+            console.log(citizen, "citizen")
+            const response = await fetch(`http://localhost:4000/household/add_member/${params.household_id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(citizen)
+            });
+            const data = await response.json();
+            if (response.ok) {
+                setCitizen({ citizen_id: "", relation: "" })
+                setShowModal(false)
+                window.alert(data.message)
+            } else {
+                console.log(data.error[0].message)
+                window.alert(data.error[0].message)
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
-    const handleAddressChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setAddress({ ...address, [name]: value });
+    const handleGetCitizenId = async () => {
+        setShowModal(true);
+        const token =
+            localStorage.getItem('access_token') ||
+            sessionStorage.getItem('access_token');
+        try {
+            console.log(citizen, "citizen")
+            const response = await fetch(`http://localhost:4000/citizen/find?key=${cccd}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const data = await response.json();
+            console.log(data.data.result[0]._id);
+            setCitizenID(data.data.result[0]._id);
+            console.log(citizenID, "alooo")
+        } catch (error) {
+            console.error(error);
+        }
     };
-    const handleMoveInChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setMoveIn({ ...moveIn, [name]: value })
-    }
     const jobMenu = {
         data: [
             {
@@ -75,6 +107,20 @@ const UpdateHouseHold = ({ params }) => {
             },
         ],
     };
+    const onCccdChange = (e) => {
+        const name = e.target.name
+        const value = e.target.value
+        setCccd(value)
+        console.log("cccd = ", value)
+    };
+    const onRelationChange = (e) => {
+        const name = e.target.name
+        const value = e.target.value
+        setRelation(value)
+        setCitizen({ ...citizen, [name]: value })
+        console.log(citizen)
+
+    }
     return (
         <div className='flex'>
             <div className="flex-auto w-1/5 bg-slate-500 h-screen">
@@ -82,18 +128,18 @@ const UpdateHouseHold = ({ params }) => {
             </div>
             <div className='flex w-4/5 bg-white justify-center'>
                 <div className="bg-white mt-24 px-6 py-8 rounded shadow-md text-black w-full">
-                    <h1 className="mb-8 text-3xl text-center">Cập nhật hộ khẩu</h1>
-                    <label className="block text-gray-700 text-sm font-bold mb-2" for="Họ và tên chủ hộ">
-                        Họ và tên
+                    <h1 className="mb-8 text-3xl text-center">Thêm thành viên mới</h1>
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Họ và tên chủ hộ">
+                        Họ và tên chủ hộ
                     </label>
                     <div className='w-full'>
                         <input
                             type="text"
                             className="block border border-grey-light w-full p-3 rounded mb-4"
                             name="name"
-                            placeholder="Họ và tên chủ hộ"
                             value={name}
-                            onChange={handleNameChange} />
+                            placeholder="Họ và tên chủ hộ"
+                        />
                     </div>
                     <div className="flex space-x-12">
                         <div className='mr-8 w-full'>
@@ -107,39 +153,18 @@ const UpdateHouseHold = ({ params }) => {
                                 placeholder="Mã hộ"
                                 value={household.household_id}
                             />
-                            <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Số nhà
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Họ và tên chủ hộ">
+                                Số căn cước công dân của thành viên muốn thêm :
                             </label>
-                            <input
-                                type="text"
-                                className="block border border-grey-light w-full p-3 rounded mb-4"
-                                name="no"
-                                value={address.no}
-                                onChange={handleAddressChange}
-                                placeholder="Số nhà"
-                            />
-                            <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Ngày chuyển đến
-                            </label>
-                            <input
-                                type="text"
-                                className="block border border-grey-light w-full p-3 rounded mb-4"
-                                name="date"
-                                value={moveIn.date}
-                                onChange={handleMoveInChange}
-                                placeholder="Ngày chuyển đến"
-                            />
-                            <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Lý do
-                            </label>
-                            <input
-                                type="text"
-                                className="block border border-grey-light w-full p-3 rounded mb-4"
-                                name="Lý do"
-                                value={moveIn.reason == "" ? "Chưa có" : moveIn.reason}
-                                onChange={handleMoveInChange}
-                                placeholder="Lý do"
-                            />
+                            <div className='w-full'>
+                                <input
+                                    type="text"
+                                    className="block border border-grey-light w-full p-3 rounded mb-4"
+                                    name="citizen_id"
+                                    placeholder="Số căn cước"
+                                    onChange={onCccdChange}
+                                />
+                            </div>
                         </div>
                         <div className="w-full">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -152,45 +177,25 @@ const UpdateHouseHold = ({ params }) => {
                                 value={household.areaCode}
                                 placeholder="Mã vùng"
                             />
-                            <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Phường
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Họ và tên chủ hộ">
+                                Quan hệ với chủ hộ
                             </label>
-                            <input
-                                type="text"
-                                className="block border border-grey-light w-full p-3 rounded mb-4"
-                                name="ward"
-                                value={address.ward}
-                                onChange={handleAddressChange}
-                                placeholder="ward"
-                            />
-                            <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Quận
-                            </label>
-                            <input
-                                type="text"
-                                className="block border border-grey-light w-full p-3 rounded mb-4"
-                                name="district"
-                                value={address.district}
-                                onChange={handleAddressChange}
-                                placeholder="Quận"
-                            />
-                            <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Huyện
-                            </label>
-                            <input
-                                type="text"
-                                className="block border border-grey-light w-full p-3 rounded mb-4"
-                                name="province"
-                                onChange={handleAddressChange}
-                                value={address.province}
-                                placeholder="Huyện"
-                            />
+                            <div className='w-full'>
+                                <input
+                                    type="text"
+                                    className="block border border-grey-light w-full p-3 rounded mb-4"
+                                    name="relation"
+                                    placeholder="Quan hệ với chủ hộ"
+                                    onChange={onRelationChange}
+                                />
+                            </div>
                         </div>
                     </div>
+
                     <div className='flex items-center w-full'>
                     </div>
                     <div className="text-center text-sm text-grey-dark mt-4">
-                        <BlueButton onClick={() => setShowModal(true)} text="Cập nhật"></BlueButton>
+                        <BlueButton onClick={handleGetCitizenId} text="Cập nhật"></BlueButton>
                         {showModal ? (
                             <>
                                 <div
@@ -202,7 +207,7 @@ const UpdateHouseHold = ({ params }) => {
                                             {/*header*/}
                                             <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                                                 <h3 className="text-3xl font-semibold">
-                                                    Xác nhận cập nhật
+                                                    Xác nhận thêm
                                                 </h3>
                                                 <button
                                                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -216,7 +221,7 @@ const UpdateHouseHold = ({ params }) => {
                                             {/*body*/}
                                             <div className="relative p-6 flex-auto">
                                                 <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                                                    Bạn có chắc chắn muốn cập nhật hộ khẩu?
+                                                    Bạn có chắc chắn muốn thêm thành viên này?
                                                 </p>
                                             </div>
                                             {/*footer*/}
@@ -228,7 +233,7 @@ const UpdateHouseHold = ({ params }) => {
                                                 >
                                                     Đóng
                                                 </button>
-                                                <BlueButton text="Cập nhật" onClick={() => setShowModal(false)}></BlueButton>
+                                                <BlueButton text="Xác nhận" onClick={handleAddNewMember}></BlueButton>
                                             </div>
                                         </div>
                                     </div>
@@ -243,4 +248,4 @@ const UpdateHouseHold = ({ params }) => {
     )
 }
 
-export default UpdateHouseHold
+export default AddNewMember

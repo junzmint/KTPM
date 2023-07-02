@@ -134,7 +134,9 @@ function HouseholdDetailPage({ params }) {
                     </div>
                     <div className='flex justify-center items-center'>
                         <div className='flex'>
-                            <BlueButton text="Thêm thành viên"></BlueButton>
+                            <Link href={"../../../leader/addnewmember/" + household._id}>
+                                <BlueButton text="Thêm thành viên"></BlueButton>
+                            </Link>
                         </div>
                     </div>
                 </div>
