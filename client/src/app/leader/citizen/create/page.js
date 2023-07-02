@@ -8,34 +8,34 @@ const CreateNewForm = (params) => {
   const [citizenName, setCitizenName] = useState([]);
   const [userRoles, setUserRoles] = useState({});
 
-  useEffect(() => {
-    (async () => {
-      const token =
-        localStorage.getItem("access_token") ||
-        sessionStorage.getItem("access_token");
-      try {
-        const response = await fetch(
-          `http://localhost:4000/citizen/profile/${params.params.id}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+//   useEffect(() => {
+//     (async () => {
+//       const token =
+//         localStorage.getItem("access_token") ||
+//         sessionStorage.getItem("access_token");
+//       try {
+//         const response = await fetch(
+//           `http://localhost:4000/citizen/profile/${params.params.id}`,
+//           {
+//             method: "GET",
+//             headers: {
+//               Authorization: `Bearer ${token}`,
+//             },
+//           }
+//         );
 
-        const data = await response.json();
-        const citizen = data.data.citizen;
-        setCitizen(citizen);
-        setCitizenName(citizen.name);
-        console.log(citizen);
+//         const data = await response.json();
+//         const citizen = data.data.citizen;
+//         setCitizen(citizen);
+//         setCitizenName(citizen.name);
+//         console.log(citizen);
 
-        setUserRoles(localStorage.role);
-      } catch (e) {
-        console.error(e);
-      }
-    })();
-  }, []);
+//         setUserRoles(localStorage.role);
+//       } catch (e) {
+//         console.error(e);
+//       }
+//     })();
+//   }, []);
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -100,7 +100,6 @@ const CreateNewForm = (params) => {
                   class="block border border-grey-light w-full p-3 rounded mb-4"
                   name="_id"
                   placeholder="Họ"
-                  value={citizenName.firstName}
                   onChange={handleChangeName}
                 />
                 <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -111,7 +110,6 @@ const CreateNewForm = (params) => {
                   class="block border border-grey-light w-full p-3 rounded mb-4"
                   name="dob"
                   placeholder="Ngay sinh"
-                  value={citizen.dob}
                   onChange={handleChange}
                 />
                 <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -122,7 +120,6 @@ const CreateNewForm = (params) => {
                   class="block border border-grey-light w-full p-3 rounded mb-4"
                   name="hometown"
                   placeholder="Que quan"
-                  value={citizen.hometown}
                   onChange={handleChange}
                 />
                 <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -133,7 +130,6 @@ const CreateNewForm = (params) => {
                   class="block border border-grey-light w-full p-3 rounded mb-4"
                   name="religion"
                   placeholder="Tôn giáo"
-                  value={citizen.religion}
                   onChange={handleChange}
                 />
                 <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -144,7 +140,6 @@ const CreateNewForm = (params) => {
                   class="block border border-grey-light w-full p-3 rounded mb-4"
                   name="education"
                   placeholder="Trình độ học vấn"
-                  value={citizen.education}
                   onChange={handleChange}
                 />
               </div>
@@ -157,7 +152,6 @@ const CreateNewForm = (params) => {
                   class="block border border-grey-light w-full p-3 rounded mb-4"
                   name="_id"
                   placeholder="Ten"
-                  value={citizenName.lastName}
                   onChange={handleChangeName}
                 />
                 <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -168,7 +162,6 @@ const CreateNewForm = (params) => {
                   class="block border border-grey-light w-full p-3 rounded mb-4"
                   name="gender"
                   placeholder="Giới tính"
-                  value={citizen.gender}
                   onChange={handleChange}
                 />
                 <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -179,7 +172,6 @@ const CreateNewForm = (params) => {
                   class="block border border-grey-light w-full p-3 rounded mb-4"
                   name="birthPlace"
                   placeholder="Noi sinh"
-                  value={citizen.birthPlace}
                   onChange={handleChange}
                 />
                 <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -190,7 +182,6 @@ const CreateNewForm = (params) => {
                   class="block border border-grey-light w-full p-3 rounded mb-4"
                   name="ethic"
                   placeholder="Dân tộc"
-                  value={citizen.ethic}
                   onChange={handleChange}
                 />
               </div>

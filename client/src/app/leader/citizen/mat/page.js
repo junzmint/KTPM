@@ -42,8 +42,8 @@ const Dashboard = () => {
       },
       {
         id: 2,
-        name: "death",
-        path: "/leader/death",
+        name: "Citizen",
+        path: "/leader/citizen",
         auth: userRoles,
       },
       {
