@@ -10,14 +10,14 @@ export default function Layout({ children }) {
     data: [
       {
         id: 1,
-        name: "Tạo người dùng mới",
-        path: "/admin/signup",
+        name: "Người dùng",
+        path: "/admin",
         auth: userRoles,
       },
       {
         id: 2,
-        name: "Người dùng",
-        path: "/admin",
+        name: "Tạo người dùng mới",
+        path: "/admin/signup",
         auth: userRoles,
       },
     ],
