@@ -163,7 +163,7 @@ const Fee = () => {
   };
   return (
     <div className="flex">
-      <div className="flex-auto w-1/5 bg-slate-500">
+      <div className="flex-auto w-1/5">
         <Navbar data={jobMenu} />
       </div>
 
@@ -439,7 +439,13 @@ const Fee = () => {
                                     id="helper-checkbox-text"
                                     className="text-xs font-normal text-gray-500 dark:text-gray-500"
                                   >
-                                    Phí = Yêu cầu x Số người trong hộ khẩu
+                                    Phí = Yêu cầu x Số người trong hộ khẩu. 
+                                  </p>
+                                  <p
+                                    id="helper-checkbox-text"
+                                    className="text-xs font-normal text-gray-500 dark:text-gray-500"
+                                  >
+                                     Nếu yêu cầu bằng 0 thì sẽ trở thành một khoản đóng góp, nếu yêu cầu lớn hơn không sẽ trở thành một khoản phí.
                                   </p>
                                 </div>
                               </div>
@@ -535,11 +541,128 @@ const Fee = () => {
                   >
                     <div className="flex">
                       <button
+                      onClick={() => {
+                        setUpdateUnit(unit);
+                        setName(unit.name);
+                        setRequired(unit.required);
+                        setmemberPayment(unit.memberPayment);
+                        setShowModalUpdate(true);
+                      }}
                         type="button"
                         className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 "
                       >
                         Sửa
                       </button>
+                      {showModalUpdate ? (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
+                          <div className="relative w-auto max-w-3xl mx-auto my-6">
+                            {/*content*/}
+                            <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
+                              {/*header*/}
+                              <div className="flex items-start justify-between p-5 border-b border-solid rounded-t border-slate-200">
+                                <h3 className="text-3xl font-semibold">
+                                  Sửa khoản đóng góp
+                                </h3>
+                              </div>
+                              <div className="flex items-start justify-between p-5 border-b border-solid rounded-t border-slate-200">
+                                <div className="relative w-full">
+                                  <input
+                                    type="text"
+                                    id="floating_filled"
+                                    value={name}
+                                    onChange={(event) => {
+                                      setName(event.target.value);
+                                    }}
+                                    className="rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    placeholder=" "
+                                  />
+                                  <label
+                                    for="floating_filled"
+                                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                                  >
+                                    Tên
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div className="items-start justify-between p-5 border-b border-solid rounded-t lex border-slate-200">
+                                <div className="relative w-full">
+                                  <input
+                                    type="text"
+                                    id="floating_filled"
+                                    className="rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    placeholder=" "
+                                    value={required}
+                                    onChange={(event) => {
+                                      setRequired(event.target.value);
+                                    }}
+                                  />
+                                  <label
+                                    for="floating_filled"
+                                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                                  >
+                                    Yêu cầu
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div className="flex p-5 border-b border-solid rounded-t border-slate-200">
+                                <div className="flex items-center h-5">
+                                  <input
+                                    checked={memberPayment}
+                                    onChange={(event) =>
+                                      setmemberPayment(event.target.checked)
+                                    }
+                                    id="helper-checkbox"
+                                    aria-describedby="helper-checkbox-text"
+                                    type="checkbox"
+                                    value=""
+                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                  />
+                                </div>
+                                <div className="ml-2 text-sm">
+                                  <label
+                                    for="helper-checkbox"
+                                    className="font-medium text-gray-900 dark:text-gray-500"
+                                  >
+                                    Tính theo số người
+                                  </label>
+                                  <p
+                                    id="helper-checkbox-text"
+                                    className="text-xs font-normal text-gray-500 dark:text-gray-500"
+                                  >
+                                    Phí = Yêu cầu x Số người trong hộ khẩu. 
+                                  </p>
+                                  <p
+                                    id="helper-checkbox-text"
+                                    className="text-xs font-normal text-gray-500 dark:text-gray-500"
+                                  >
+                                     Nếu yêu cầu bằng 0 thì sẽ trở thành một khoản đóng góp, nếu yêu cầu lớn hơn không sẽ trở thành một khoản phí.
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/*footer*/}
+                              <div className="flex items-start justify-between p-5 border-b border-solid rounded-t border-slate-200">
+                                <button
+                                  className="px-6 py-2 mb-1 mr-1 text-sm font-bold text-red-500 uppercase transition-all duration-150 ease-linear outline-none background-transparent focus:outline-none"
+                                  type="button"
+                                  onClick={() => setShowModalUpdate(false)}
+                                >
+                                  Đóng
+                                </button>
+                                <button
+                                  className="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none bg-emerald-500 active:bg-emerald-600 hover:shadow-lg focus:outline-none"
+                                  type="button"
+                                  onClick={() => updateFee(updateUnit)}
+                                >
+                                  Cập nhật
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : null}
                       <button
                         type="button"
                         className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 "
