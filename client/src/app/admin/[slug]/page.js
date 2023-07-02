@@ -39,6 +39,8 @@ const UserDetail = ({ params }) => {
     }
     getUser();
   }, []);
+  const [modal, setModal] = useState("");
+  const [isUpdate, setIsUpdate] = useState(false);
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -56,7 +58,29 @@ const UserDetail = ({ params }) => {
     const token =
       localStorage.getItem("access_token") ||
       sessionStorage.getItem("access_token");
-    console.log(user);
+    const response = await fetch(
+      `http://localhost:4000/user/update_profile/${user._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          phone: user.phone,
+          role: user.role,
+        }),
+      }
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      setIsUpdate(true);
+      setModal(data?.message);
+    } else {
+      setIsUpdate(true);
+      setModal("fail");
+    }
   };
   return (
     <div className="flex flex-row w-4/5 px-10 mx-auto bg-white justify-center">
@@ -114,6 +138,7 @@ const UserDetail = ({ params }) => {
               </button>
             </div>
           </form>
+          {isUpdate && <div>{modal}</div>}
         </div>
       </div>
     </div>
