@@ -13,9 +13,9 @@ const Item = ({ data }) => {
           minHeight: ITEM_HEIGHT,
           maxHeight: ITEM_HEIGHT,
         }}
-        className="text-light w-full rounded-[3px] hover:bg-primary-dark flex items-center px-[10px] cursor-pointer"
+        className=" w-full rounded-[3px] hover:bg-slate-300 flex items-center cursor-pointer mt-4 mb-4"
       >
-        <div className="font-medium whitespace-nowrap select-none">{name}</div>
+        <div className="font-medium whitespace-nowrap select-none text-gray-50 text-xl text-center ml-3">{name}</div>
       </div>
     </Link>
   );
