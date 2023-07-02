@@ -65,7 +65,7 @@ const SignUp = () => {
   };
 
   return (
-    <>
+    <div className="mx-auto">
       <div className="flex flex-col align-center">
         <form onSubmit={handleSubmit}>
           <div>
@@ -111,7 +111,7 @@ const SignUp = () => {
         </form>
       </div>
       {isSuccess && <div>{successMessage}</div>}
-    </>
+    </div>
   );
 };
 export default SignUp;
