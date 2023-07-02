@@ -4,6 +4,7 @@ import BlueButton from '@/components/button/blue-button';
 import Navbar from '@/components/navbar';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Button from '@/components/button/button';
 
 function HouseHold() {
     const [households, setHouseholds] = useState([]);
@@ -22,6 +23,7 @@ function HouseHold() {
                     },
                 });
                 const data = await response.json();
+                console.log(data.data.list);
                 setHouseholds(data.data.list)
             } catch (e) {
                 console.error(e);
@@ -55,12 +57,6 @@ function HouseHold() {
     const seeDetail = (id) => {
         router.push(`./household/${id}`)
     }
-
-    const handleDelete = (id) => {
-        households.splice(id, 1); // 2nd parameter means remove one item only
-
-        setHouseholds(households => households);
-    }
     return (
         <div className='flex'>
             <div className="flex-auto w-1/5 bg-slate-500 h-screen">
@@ -78,9 +74,7 @@ function HouseHold() {
 
                                 </th>
                                 <th scope="col" className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left flex justify-end">
-                                    <Link href='../../leader/addnewhousehold'>
-                                        <BlueButton text="Tạo"></BlueButton>
-                                    </Link>
+                                    <Button text="Tạo" color="green"></Button>
                                 </th>
                             </tr>
                             <tr className="bg-white border-b">
@@ -116,8 +110,8 @@ function HouseHold() {
                                                     pathname: './household/detail',
                                                 }}
                                             >
+                                                <BlueButton text="Xoá"></BlueButton>
                                             </Link>
-                                            <BlueButton onClick={() => { setHouseholds(households.splice(index - 1, 1)) }} text="Xoá"></BlueButton>
                                         </div>
                                     </td>
                                 </tr>
