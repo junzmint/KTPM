@@ -1,6 +1,7 @@
 'use client';
 import BlueButton from '@/components/button/blue-button';
 import Navbar from '@/components/navbar';
+import { Html } from 'next/document';
 import React, { useState, useEffect } from 'react';
 
 const Fee = () => {
@@ -48,9 +49,9 @@ const Fee = () => {
         return item;
       });
       setFeeList([...fee]);
-      // setName('');
-      // setRequired('');
-      // setmemberPayment(false);
+      setName('');
+      setRequired('');
+      setmemberPayment(false);
       window.alert(successMessage);
     } else {
       setIsSuccess(true);
@@ -163,12 +164,13 @@ const Fee = () => {
   };
   return (
     <div className="flex">
-      <div className="flex-auto w-1/5">
+      <div className="flex-auto w-1/5 h-screen">
         <Navbar data={jobMenu} />
       </div>
 
       <div className="flex justify-center w-4/5 bg-blue">
-        <div className="w-4/5 overflow-x-auto rounded stroke-1 drop-shadow-md">
+        
+        <div className="w-4/5 overflow-x-auto rounded stroke-1 drop-shadow-md ">
           <div className="flex-auto !border-none	  drop-shadow-md mt-20 bg-gray-100 px-8 py-6">
             <h1 className="text-2xl font-bold">
               Danh sách các khoản phí, đóng góp
