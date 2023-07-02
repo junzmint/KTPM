@@ -19,11 +19,10 @@ const LogoutButton = () => {
 
     if (response.ok) {
       localStorage.removeItem("access_token") ||
-      sessionStorage.removeItem("access_token");
-      localStorage.removeItem("role") ||
-      sessionStorage.removeItem("role");
+        sessionStorage.removeItem("access_token");
+      localStorage.removeItem("role") || sessionStorage.removeItem("role");
       localStorage.removeItem("refresh_token") ||
-      sessionStorage.removeItem("refresh_token");
+        sessionStorage.removeItem("refresh_token");
       router.push("/");
     } else {
       // handle logout error
@@ -31,7 +30,7 @@ const LogoutButton = () => {
   };
 
   return (
-    <div className="p-2 text-center bg-red-300 rounded-full hover:bg-red-500">
+    <div className="p-2 text-center bg-red-300 rounded-full hover:bg-red-500 mt-[74vh]">
       <button onClick={handleLogout}>Logout</button>
     </div>
   );
