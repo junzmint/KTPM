@@ -54,7 +54,12 @@ const HouseholdTransaction = ({ params }) => {
 
     const data = await response.json();
     if (response.ok) {
-      donationTransaction.push({amount: amount,fee: {name:donation.name}});
+      
+        donation.forEach((data) =>{
+          if(data._id === fee_id){
+            donationTransaction.push({status: amount,fee:{name:data.name},year:"2023"});
+          }
+        })
       setIsSuccess(true);
       setSuccessMessage(data.message);
       window.alert(successMessage);
