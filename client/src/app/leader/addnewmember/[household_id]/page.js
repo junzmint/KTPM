@@ -54,8 +54,10 @@ const AddNewMember = ({ params }) => {
             if (response.ok) {
                 setCitizen({ citizen_id: "", relation: "" })
                 setShowModal(false)
+                window.alert(data.message)
             } else {
                 console.log(data.error[0].message)
+                window.alert(data.error[0].message)
             }
         } catch (error) {
             console.error(error);
