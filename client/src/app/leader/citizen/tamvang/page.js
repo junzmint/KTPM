@@ -42,8 +42,8 @@ const Dashboard = () => {
       },
       {
         id: 2,
-        name: "absence",
-        path: "/leader/absence",
+        name: "Citizen",
+        path: "/leader/citizen",
         auth: userRoles,
       },
       {
@@ -89,10 +89,6 @@ const Dashboard = () => {
                 >
                   Danh sách nhân khẩu
                 </th>
-                {/* <th
-                  scope="col"
-                  className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left"
-                ></th> */}
                 <th
                   scope="col"
                   className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left flex justify-end"
