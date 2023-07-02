@@ -58,8 +58,10 @@ const Dashboard = () => {
       <div className="flex flex-row h-[100vh]">
         <div className="flex flex-col w-[80vw] bg-white-200 px-20">
           <div className="flex flex-row">
-            <div className="flex flex-col">
-              <h2>Main content</h2>
+            <div className="flex flex-col mx-auto pt-5">
+              <h1 className="mb-8 text-3xl text-center ">
+                Danh sách người dùng
+              </h1>
             </div>
           </div>
           <div className="overflow-x-auto rounded drop-shadow-md stroke-1 w-5/6  h-[100%] mx-auto">
