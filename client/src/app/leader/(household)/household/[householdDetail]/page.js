@@ -2,12 +2,11 @@
 
 import BlueButton from '@/components/button/blue-button';
 import Navbar from '@/components/navbar';
-import Image from 'next/legacy/image';
-import RemoveModal from '@/components/removehouseholdmodal';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 function HouseholdDetailPage({ params }) {
+    const [showModal, setShowModal] = React.useState(false);
     const [household, setHousehold] = useState({});
     const [name, setName] = useState();
     const [address, setAddress] = useState({});
@@ -64,6 +63,31 @@ function HouseholdDetailPage({ params }) {
             },
         ],
     };
+
+    const handleRemoveCitizen = async (citizenID) => {
+        const token =
+            localStorage.getItem('access_token') ||
+            sessionStorage.getItem('access_token');
+        try {
+            console.log(household._id)
+            const response = await fetch(`http://localhost:4000/household/remove_member?household_id=${household._id}&citizen_id=${citizenID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const data = await response.json();
+            if (response.ok) {
+                window.alert(data.message)
+                setShowModal(false)
+            } else {
+                window.alert(data.error[0].message)
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
     return (
         <div className='flex  h-full'>
             <div className="flex-auto w-1/5 bg-slate-500 ">
@@ -86,8 +110,8 @@ function HouseholdDetailPage({ params }) {
                         <p>Mã hộ: {household.household_id}</p>
                         <p>Địa chỉ: {address.no + ", " + address.ward + ", " + address.district + ", " + address.province}</p>
                         <p>Mã khu vực: {household.areaCode}</p>
-                        <p>Ngày chuyển đến: {moveIn.date}</p>
-                        <p>Lý do chuyển đến: {moveIn.reason == "" ? "Chưa có" : moveIn.reason}</p>
+                        <p>Ngày chuyển đến: {moveIn == null ? "Chưa có" : moveIn.date}</p>
+                        <p>Lý do chuyển đến: {moveIn == null ? "Chưa có" : moveIn.reason}</p>
                     </div>
                     <div className='mt-8 flex justify-center items-center'>
                         <div className='flex'>
@@ -124,7 +148,55 @@ function HouseholdDetailPage({ params }) {
                                                 <Link href={"/leader/citizen/nhankhau/" + mem.citizen_id._id}>
                                                     <BlueButton text="Xem"></BlueButton>
                                                 </Link>
-                                                <RemoveModal></RemoveModal>
+                                                <BlueButton onClick={() => setShowModal(true)} text="Tách hộ"></BlueButton>
+                                                {showModal ? (
+                                                    <>
+                                                        <div
+                                                            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                                                        >
+                                                            <div className="fixed w-auto my-6 mx-auto max-w-3xl">
+                                                                {/*content*/}
+                                                                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                                                    {/*header*/}
+                                                                    <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                                                                        <h3 className="text-3xl font-semibold">
+                                                                            Xác nhận tách
+                                                                        </h3>
+                                                                        <button
+                                                                            className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                                                                            onClick={() => setShowModal(false)}
+                                                                        >
+                                                                            <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                                                                                x
+                                                                            </span>
+                                                                        </button>
+                                                                    </div>
+                                                                    {/*body*/}
+                                                                    <div className="relative p-6 flex-auto">
+                                                                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                                                                            Bạn có muốn tách người này khỏi hộ?
+                                                                        </p>
+                                                                    </div>
+                                                                    {/*footer*/}
+                                                                    <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                                                                        <button
+                                                                            className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                                                            type="button"
+                                                                            onClick={() => setShowModal(false)}
+                                                                        >
+                                                                            Đóng
+                                                                        </button>
+                                                                        <BlueButton text="Tách hộ" onClick={
+                                                                            () => { handleRemoveCitizen(mem.citizen_id._id) }
+                                                                        }
+                                                                        ></BlueButton>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                                                    </>
+                                                ) : null}
                                             </th>
                                         </tr>
                                     ))
@@ -134,7 +206,9 @@ function HouseholdDetailPage({ params }) {
                     </div>
                     <div className='flex justify-center items-center'>
                         <div className='flex'>
-                            <BlueButton text="Thêm thành viên"></BlueButton>
+                            <Link href={"../../../leader/addnewmember/" + household._id}>
+                                <BlueButton text="Thêm thành viên"></BlueButton>
+                            </Link>
                         </div>
                     </div>
                 </div>

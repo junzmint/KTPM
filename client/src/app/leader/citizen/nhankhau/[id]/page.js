@@ -10,6 +10,7 @@ const Dashboard = ({ params }) => {
   const [citizenDetail, setCitizenDetail] = useState([]);
   const [citizenDoB, setCitizenDoB] = useState([]);
   const [citizenName, setCitizenName] = useState([]);
+  const [citizenCard, setCitizenCard] = useState([]);
   const [userRoles, setUserRoles] = useState({});
 
   useEffect(() => {
@@ -32,6 +33,7 @@ const Dashboard = ({ params }) => {
         setCitizenDetail(citizenData);
         setCitizenName(citizenData.name);
         setCitizenDoB(citizenData.dob.substr(0, 10));
+        setCitizenCard(citizenData.card_id);
       } catch (e) {
         console.error(e);
       }
@@ -66,7 +68,7 @@ const Dashboard = ({ params }) => {
         <Navbar data={jobMenu} />
       </div>
       <div className="flex-auto w-4/5 bg-slate-100  h-full flex justify-center flex-col ">
-        <div className="ml-24 w-4/5 max-w-7xl h-3/4 p-2 mt-2 bg-white border-gray-200 rounded-lg shadow">
+        <div className="ml-24 w-5/6 max-w-7xl h-4/5 p-2 mt-2 bg-white border-gray-200 rounded-lg shadow">
           <div className="flex justify-end px-4 pt-4">
             <button
               id="dropdownButton"
@@ -100,6 +102,7 @@ const Dashboard = ({ params }) => {
             </span>
           </div>
           <div className="ml-4">
+            <p>Căn cước công dân: {citizenCard.card_id} </p>
             <p>Ngày sinh: {citizenDoB} </p>
             <p>Hộ chiếu: {citizenDetail.passport_id}</p>
             <p>Quê quán: {citizenDetail.hometown}</p>
@@ -111,7 +114,11 @@ const Dashboard = ({ params }) => {
           </div>
           <div className="mt-10 flex justify-center items-center">
             <div className="flex">
-              <Link href={"/leader/citizen/nhankhau/" + citizenDetail._id + "/update"}>
+              <Link
+                href={
+                  "/leader/citizen/nhankhau/" + citizenDetail._id + "/update"
+                }
+              >
                 <BlueButton text="Cập nhật"></BlueButton>
               </Link>
             </div>
