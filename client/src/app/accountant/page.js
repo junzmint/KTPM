@@ -7,18 +7,18 @@ const Dashboard = () => {
     data: [
       {
         id: 1,
-        name: "Dashboard",
-        path: "/accountant",
+        name: 'Trang chủ',
+        path: '/accountant',
       },
       {
         id: 2,
-        name: "Fee",
-        path: "/accountant/fee",
+        name: 'Khoản phí/ đóng góp',
+        path: '/accountant/fee',
       },
       {
         id: 3,
-        name: "Transaction",
-        path: "/accountant/transaction",
+        name: 'Khoản thu',
+        path: '/accountant/transaction',
       },
     ],
   };
