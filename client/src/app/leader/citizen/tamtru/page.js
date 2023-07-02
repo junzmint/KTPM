@@ -36,19 +36,19 @@ const Dashboard = () => {
     data: [
       {
         id: 1,
-        name: "Dashboard",
+        name: "Trang chủ",
         path: "/leader",
         auth: userRoles,
       },
       {
         id: 2,
-        name: "Citizen",
+        name: "Nhân khẩu",
         path: "/leader/citizen",
         auth: userRoles,
       },
       {
         id: 3,
-        name: "Household",
+        name: "Hộ dân cư",
         path: "/leader/household",
         auth: userRoles,
       },
@@ -133,18 +133,19 @@ const Dashboard = () => {
                   <td className="text-sm text-gray-900 !border-none font-medium px-6 py-4 whitespace-nowrap">
                     {index + 1}
                   </td>
-                  <td
-                    className="text-sm text-gray-900 !border-none font-medium px-6 py-4 whitespace-nowrap"
-                  >
-                    {unit.citizen_id.name.firstName + " " + unit.citizen_id.name.lastName}
+                  <td className="text-sm text-gray-900 !border-none font-medium px-6 py-4 whitespace-nowrap">
+                    {unit.citizen_id.name.firstName +
+                      " " +
+                      unit.citizen_id.name.lastName}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm !border-none font-medium text-gray-900">
-                    {unit.date.from.substr(0,10)}
+                    {unit.date.from.substr(0, 10)}
                   </td>
-                  <td 
-                  colSpan="4"
-                  className="px-6 py-4 whitespace-nowrap text-sm !border-none font-medium text-gray-900">
-                    {unit.date.to.substr(0,10)}
+                  <td
+                    colSpan="4"
+                    className="px-6 py-4 whitespace-nowrap text-sm !border-none font-medium text-gray-900"
+                  >
+                    {unit.date.to.substr(0, 10)}
                   </td>
                   <td
                     colSpan="4"
@@ -158,7 +159,12 @@ const Dashboard = () => {
                       >
                         <BlueButton text="Xem"></BlueButton>
                       </Link>
-                      <BlueButton onClick={() => { setStay(stay.splice(index - 1, 1)) }} text="Xóa"></BlueButton>
+                      <BlueButton
+                        onClick={() => {
+                          setStay(stay.splice(index - 1, 1));
+                        }}
+                        text="Xóa"
+                      ></BlueButton>
                     </div>
                   </td>
                 </tr>

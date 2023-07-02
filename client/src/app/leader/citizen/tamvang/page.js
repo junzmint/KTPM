@@ -36,19 +36,19 @@ const Dashboard = () => {
     data: [
       {
         id: 1,
-        name: "Dashboard",
+        name: "Trang chủ",
         path: "/leader",
         auth: userRoles,
       },
       {
         id: 2,
-        name: "Citizen",
+        name: "Nhân khẩu",
         path: "/leader/citizen",
         auth: userRoles,
       },
       {
         id: 3,
-        name: "Household",
+        name: "Hộ dân cư",
         path: "/leader/household",
         auth: userRoles,
       },
@@ -156,7 +156,12 @@ const Dashboard = () => {
                       >
                         <BlueButton text="Xem"></BlueButton>
                       </Link>
-                      <BlueButton onClick={() => { setAbsence(absence.splice(index - 1, 1)) }} text="Xóa"></BlueButton>
+                      <BlueButton
+                        onClick={() => {
+                          setAbsence(absence.splice(index - 1, 1));
+                        }}
+                        text="Xóa"
+                      ></BlueButton>
                     </div>
                   </td>
                 </tr>

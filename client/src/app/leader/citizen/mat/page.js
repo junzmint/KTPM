@@ -36,19 +36,19 @@ const Dashboard = () => {
     data: [
       {
         id: 1,
-        name: "Dashboard",
+        name: "Trang chủ",
         path: "/leader",
         auth: userRoles,
       },
       {
         id: 2,
-        name: "Citizen",
+        name: "Nhân khẩu",
         path: "/leader/citizen",
         auth: userRoles,
       },
       {
         id: 3,
-        name: "Household",
+        name: "Hộ dân cư",
         path: "/leader/household",
         auth: userRoles,
       },
@@ -137,7 +137,7 @@ const Dashboard = () => {
                     colSpan="5"
                     className="px-6 py-4 whitespace-nowrap text-sm !border-none font-medium text-gray-900"
                   >
-                    {unit.date.substr(0,10)}
+                    {unit.date.substr(0, 10)}
                   </td>
                   <td
                     colSpan="4"
@@ -151,7 +151,12 @@ const Dashboard = () => {
                       >
                         <BlueButton text="Xem"></BlueButton>
                       </Link>
-                      <BlueButton onClick={() => { setDeath(death.splice(index - 1, 1)) }} text="Xóa"></BlueButton>
+                      <BlueButton
+                        onClick={() => {
+                          setDeath(death.splice(index - 1, 1));
+                        }}
+                        text="Xóa"
+                      ></BlueButton>
                     </div>
                   </td>
                 </tr>

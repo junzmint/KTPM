@@ -48,7 +48,7 @@ const Dashboard = () => {
   return (
     <React.Fragment>
       <div className="flex flex-row">
-        <div className="flex flex-col w-[20%] bg-red-200">
+        <div className="flex flex-col w-[20%]">
           <Navbar data={jobMenu}></Navbar>
         </div>
         <div className="flex flex-col w-[80%] bg-white-200 px-20">
