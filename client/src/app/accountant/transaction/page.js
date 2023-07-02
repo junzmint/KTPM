@@ -15,7 +15,7 @@ const Transaction = () => {
       },
       {
         id: 2,
-        name: 'Khoản phí/ đóng góp',
+        name: 'Khoản phí - đóng góp',
         path: '/accountant/fee',
       },
       {
