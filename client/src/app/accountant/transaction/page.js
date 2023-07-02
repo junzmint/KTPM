@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from "next/link";
 import Navbar from '@/components/navbar';
+import BlueButton from '@/components/button/blue-button';
 const Transaction = () => {
   const [household, setHousehold] = useState([]);
   const jobMenu = {
@@ -44,7 +46,7 @@ const Transaction = () => {
   }, []);
   return (
     <div className="flex">
-      <div className="flex-auto w-1/5 h-screen bg-slate-500">
+      <div className="flex-auto w-1/5 h-screen ">
         <Navbar data={jobMenu} />
       </div>
       <div className="flex justify-center w-4/5 bg-blue">
@@ -116,15 +118,14 @@ const Transaction = () => {
                     className="text-sm text-gray-900 !border-none font-medium px-6 py-4 whitespace-nowrap flex justify-end"
                   >
                     <div className="flex">
-                    <button
-                        type="button"
-                        onClick={() => {
-                          
+                    <Link
+                        href={{
+                          pathname: "/accountant/transaction/" + unit._id,
                         }}
-                        className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 "
                       >
-                        Xem
-                      </button>
+                        <BlueButton text="Xem"></BlueButton>
+                      </Link>
+                    
                     </div>
                   </td>
                 </tr>
