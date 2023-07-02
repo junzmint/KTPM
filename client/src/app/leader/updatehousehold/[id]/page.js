@@ -10,6 +10,7 @@ const UpdateHouseHold = ({ params }) => {
     const [name, setName] = useState();
     const [address, setAddress] = useState({});
     const [moveIn, setMoveIn] = useState({});
+    const [moveOut, setMoveOut] = useState({});
     const [ownerId, setOwnerId] = useState({});
     const [members, setMembers] = useState([]);
     useEffect(() => {
@@ -25,12 +26,12 @@ const UpdateHouseHold = ({ params }) => {
                     },
                 });
                 const data = await response.json();
-                console.log(data.data.household);
                 setName(data.data.household.members[0].citizen_id.name.firstName
                     + " " + data.data.household.members[0].citizen_id.name.lastName)
                 setHousehold(data.data.household)
                 setAddress(data.data.household.address)
                 setMoveIn(data.data.household.move_in)
+                setMoveOut(data.data.household.move_out)
                 setMembers(data.data.household.members)
                 setOwnerId(data.data.household.owner_id)
             } catch (e) {
@@ -75,8 +76,55 @@ const UpdateHouseHold = ({ params }) => {
             },
         ],
     };
-    return (
 
+    const handleUpdate = () => {
+        console.log(
+            moveOut
+        )
+        setShowModal(false)
+    }
+
+    const handleUpdateHousehold = async () => {
+        let object_body = {
+            move_in: moveIn,
+            move_out: moveOut,
+            household_id: household.household_id,
+            owner_id: household.owner_id._id,
+            areaCode: household.areaCode,
+            address: {
+                province: address.province,
+                district: address.district,
+                ward: address.ward,
+                no: address.no,
+            },
+            members: members,
+        }
+        console.log(object_body)
+        const token =
+            localStorage.getItem('access_token') ||
+            sessionStorage.getItem('access_token');
+        try {
+            const response = await fetch(`http://localhost:4000/household/update/${params.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(object_body)
+            });
+            const data = await response.json();
+            if (response.ok) {
+                setShowModal(false)
+                window.alert(data.message)
+            } else {
+                window.alert(data.error[0].message)
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    return (
         <div className='flex'>
             <div className="flex-auto w-1/5 bg-slate-500 h-screen">
                 <Navbar data={jobMenu} />
@@ -84,7 +132,7 @@ const UpdateHouseHold = ({ params }) => {
             <div className='flex w-4/5 bg-white justify-center'>
                 <div className="bg-white mt-24 px-6 py-8 rounded shadow-md text-black w-full">
                     <h1 className="mb-8 text-3xl text-center">Cập nhật hộ khẩu</h1>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="Họ và tên chủ hộ">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" for="Họ và tên chủ hộ">
                         Họ và tên
                     </label>
                     <div className='w-full'>
@@ -98,7 +146,7 @@ const UpdateHouseHold = ({ params }) => {
                     </div>
                     <div className="flex space-x-12">
                         <div className='mr-8 w-full'>
-                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
                                 Mã hộ
                             </label>
                             <input
@@ -108,7 +156,7 @@ const UpdateHouseHold = ({ params }) => {
                                 placeholder="Mã hộ"
                                 value={household.household_id}
                             />
-                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
                                 Số nhà
                             </label>
                             <input
@@ -119,7 +167,7 @@ const UpdateHouseHold = ({ params }) => {
                                 onChange={handleAddressChange}
                                 placeholder="Số nhà"
                             />
-                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
                                 Ngày chuyển đến
                             </label>
                             <input
@@ -130,7 +178,7 @@ const UpdateHouseHold = ({ params }) => {
                                 onChange={handleMoveInChange}
                                 placeholder="Ngày chuyển đến"
                             />
-                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
                                 Lý do
                             </label>
                             <input
@@ -143,7 +191,7 @@ const UpdateHouseHold = ({ params }) => {
                             />
                         </div>
                         <div className="w-full">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
                                 Mã vùng
                             </label>
                             <input
@@ -153,7 +201,7 @@ const UpdateHouseHold = ({ params }) => {
                                 value={household.areaCode}
                                 placeholder="Mã vùng"
                             />
-                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
                                 Phường
                             </label>
                             <input
@@ -164,7 +212,7 @@ const UpdateHouseHold = ({ params }) => {
                                 onChange={handleAddressChange}
                                 placeholder="ward"
                             />
-                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
                                 Quận
                             </label>
                             <input
@@ -175,7 +223,7 @@ const UpdateHouseHold = ({ params }) => {
                                 onChange={handleAddressChange}
                                 placeholder="Quận"
                             />
-                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
                                 Huyện
                             </label>
                             <input
@@ -207,7 +255,7 @@ const UpdateHouseHold = ({ params }) => {
                                                 </h3>
                                                 <button
                                                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                                                    onClick={() => setShowModal(false)}
+                                                    onClick={() => { setShowModal(false) }}
                                                 >
                                                     <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
                                                         x
@@ -229,7 +277,7 @@ const UpdateHouseHold = ({ params }) => {
                                                 >
                                                     Đóng
                                                 </button>
-                                                <BlueButton text="Cập nhật" onClick={() => setShowModal(false)}></BlueButton>
+                                                <BlueButton text="Cập nhật" onClick={handleUpdateHousehold}></BlueButton>
                                             </div>
                                         </div>
                                     </div>
@@ -240,7 +288,7 @@ const UpdateHouseHold = ({ params }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

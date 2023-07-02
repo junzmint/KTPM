@@ -74,7 +74,7 @@ function HouseHold() {
 
                                 </th>
                                 <th scope="col" className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left flex justify-end">
-                                    <Button text="Tạo" color="green"></Button>
+                                    <Button text="Tạo" color="yellow"></Button>
                                 </th>
                             </tr>
                             <tr className="bg-white border-b">
@@ -110,7 +110,6 @@ function HouseHold() {
                                                     pathname: './household/detail',
                                                 }}
                                             >
-                                                <BlueButton text="Xoá"></BlueButton>
                                             </Link>
                                         </div>
                                     </td>
@@ -120,7 +119,6 @@ function HouseHold() {
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div >
     )
