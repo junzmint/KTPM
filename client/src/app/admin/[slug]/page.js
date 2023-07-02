@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { UpdateField } from "@/components/form";
+import UpdateButton from "@/components/button/button";
+import BlueButton from "../../../components/button/blue-button";
 export async function generateStaticParams() {
   const token =
     localStorage.getItem("access_token") ||
@@ -133,9 +135,7 @@ const UserDetail = ({ params }) => {
               </div>
             </div>
             <div className="mx-auto text-center flex flex-row">
-              <button className="bg-blue-200 hover:bg-blue-400" type="submit">
-                Cap nhat
-              </button>
+              <BlueButton text="Cap nhat" onClick={handleSubmit}></BlueButton>
             </div>
           </form>
           {isUpdate && <div>{modal}</div>}
