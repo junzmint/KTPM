@@ -110,7 +110,6 @@ function HouseHold() {
                                                     pathname: './household/detail',
                                                 }}
                                             >
-                                                <BlueButton text="Xoá"></BlueButton>
                                             </Link>
                                         </div>
                                     </td>
