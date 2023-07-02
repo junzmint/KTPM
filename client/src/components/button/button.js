@@ -1,13 +1,12 @@
-"use client";
-import React from "react";
+import React from 'react'
 
-function UpdateButton(props) {
-  const style = `text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700`;
-  return (
-    <button type="button" onClick={props.onClick} className={style}>
-      {props.text}
-    </button>
-  );
+function Button(props) {
+    let { color } = props;
+
+    console.log(`text-white bg-${color}-700 hover:bg-${color}-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-${color}-600 dark:hover:bg-${color}-700 `);
+    return (
+        <button type="button" onClick={props.onClick} className={`text-white bg-${color}-700 hover:bg-${color}-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-${color}-600 dark:hover:bg-${color}-700 `}>{props.text}</button>
+    )
 }
 
-export default UpdateButton;
+export default Button
