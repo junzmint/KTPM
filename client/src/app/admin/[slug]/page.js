@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { UpdateField } from "@/components/form";
+import { SubmitButton } from "@/components/button";
+import Modal from "@/components/submit-modal";
 export async function generateStaticParams() {
   const token =
     localStorage.getItem("access_token") ||
@@ -82,63 +84,61 @@ const UserDetail = ({ params }) => {
       setModal("fail");
     }
   };
+  const closeModal = () => {
+    setIsUpdate(false);
+  };
   return (
     <div className="flex flex-row w-4/5 px-10 mx-auto bg-white justify-center">
+      {isUpdate && <Modal modalContent={modal} closeModal={closeModal}></Modal>}
       <div className="bg-white mt-24 px-6 py-8 rounded shadow-md text-black w-full">
         <h1 className="mb-8 text-3xl text-center ">Cập nhật người dùng</h1>
         <div className="flex flex-row ">
-          <form className="flex w-full mx-auto" onSubmit={handleSubmit}>
-            <div className="flex flex-col w-1/2">
+          <form className=" mx-auto" onSubmit={handleSubmit}>
+            <div>
               <UpdateField data={phone} handleChange={handleChange} />
             </div>
-            <div className="flex flex-col  w-1/2 text-black">
+            <div>
               <h1 className="text-gray-700 text-sm font-bold mb-2 pl-4">
                 Role
               </h1>
-              <div>
-                <input
-                  className="mx-4"
-                  type="radio"
-                  id="ADMIN"
-                  name="role"
-                  value="ADMIN"
-                  checked={user.role === "ADMIN"}
-                  onChange={handleChange}
-                ></input>
-                <label for="role">ADMIN</label>
-              </div>
-              <div>
-                <input
-                  className="mx-4"
-                  type="radio"
-                  id="LEADER"
-                  name="role"
-                  value="LEADER"
-                  checked={user.role === "LEADER"}
-                  onChange={handleChange}
-                ></input>
-                <label for="role">LEADER</label>
-              </div>
-              <div>
-                <input
-                  className="mx-4"
-                  type="radio"
-                  id="ACCOUNTANT"
-                  name="role"
-                  value="ACCOUNTANT"
-                  checked={user.role === "ACCOUNTANT"}
-                  onChange={handleChange}
-                ></input>
-                <label for="role">ACCOUNTANT</label>
-              </div>
+
+              <input
+                className="mx-4"
+                type="radio"
+                id="ADMIN"
+                name="role"
+                value="ADMIN"
+                checked={user.role === "ADMIN"}
+                onChange={handleChange}
+              ></input>
+              <label for="role">ADMIN</label>
+
+              <input
+                className="mx-4"
+                type="radio"
+                id="LEADER"
+                name="role"
+                value="LEADER"
+                checked={user.role === "LEADER"}
+                onChange={handleChange}
+              ></input>
+              <label for="role">LEADER</label>
+
+              <input
+                className="mx-4"
+                type="radio"
+                id="ACCOUNTANT"
+                name="role"
+                value="ACCOUNTANT"
+                checked={user.role === "ACCOUNTANT"}
+                onChange={handleChange}
+              ></input>
+              <label for="role">ACCOUNTANT</label>
             </div>
-            <div className="mx-auto text-center flex flex-row">
-              <button className="bg-blue-200 hover:bg-blue-400" type="submit">
-                Cap nhat
-              </button>
+            <div className="text-center pt-5">
+              <SubmitButton text="Đăng kí" />
             </div>
           </form>
-          {isUpdate && <div>{modal}</div>}
         </div>
       </div>
     </div>

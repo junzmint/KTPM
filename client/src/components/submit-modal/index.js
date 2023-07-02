@@ -1,0 +1,17 @@
+"use client";
+import React, { useEffect } from "react";
+
+const Modal = ({ modalContent, closeModal }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      closeModal();
+    }, 3000);
+  });
+  return (
+    <div className="modal px-20 py-10">
+      <p>{modalContent}</p>
+    </div>
+  );
+};
+
+export default Modal;

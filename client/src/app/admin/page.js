@@ -43,7 +43,6 @@ const Dashboard = () => {
       );
       const data = await response.json();
       if (response.ok && data.responseStatus === 1) {
-        console.log("delete ok");
         setUser((prevUser) => prevUser?.filter((item) => item._id !== u._id));
       } else {
         console.log("delete fail");
@@ -66,7 +65,7 @@ const Dashboard = () => {
           </div>
           <div className="overflow-x-auto rounded drop-shadow-md stroke-1 w-5/6  h-[100%] mx-auto">
             <table className="flex-auto !border-none	 min-w-full drop-shadow-md relative">
-              <thead className="sticky">
+              <thead className="sticky top-0">
                 <tr className="bg-gray-100 border-b">
                   <th
                     scope="col"
@@ -118,12 +117,16 @@ const Dashboard = () => {
                     scope="col"
                     colSpan="1"
                     className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-center"
-                  ></th>
+                  >
+                    Sửa người dùng
+                  </th>
                   <th
                     scope="col"
                     colSpan="1"
                     className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-center"
-                  ></th>
+                  >
+                    Xóa người dùng
+                  </th>
                 </tr>
               </thead>
               <tbody className="overflow-auto">
@@ -184,7 +187,7 @@ const Dashboard = () => {
                   );
                 })}
               </tbody>
-              <tfoot>
+              <tfoot className="sticky bottom-0">
                 <tr className="bg-gray-100 border-b">
                   <td
                     scope="col"
