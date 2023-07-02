@@ -42,8 +42,8 @@ const Dashboard = () => {
       },
       {
         id: 2,
-        name: "stay",
-        path: "/leader/stay",
+        name: "Citizen",
+        path: "/leader/citizen",
         auth: userRoles,
       },
       {
@@ -94,7 +94,9 @@ const Dashboard = () => {
                   scope="col"
                   className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left flex justify-end"
                 >
-                  <BlueButton text="Tạo"></BlueButton>
+                  <Link href="tamtru/create">
+                    <BlueButton text="Tạo"></BlueButton>
+                  </Link>
                 </th>
               </tr>
               <tr className="bg-white border-b">
@@ -151,7 +153,7 @@ const Dashboard = () => {
                     <div className="flex">
                       <Link
                         href={{
-                          pathname: "stay/nhankhau/" + unit._id,
+                          pathname: "tamtru/" + unit._id,
                         }}
                       >
                         <BlueButton text="Xem"></BlueButton>

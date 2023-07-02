@@ -110,7 +110,6 @@ const SignUp = () => {
           </button>
         </form>
       </div>
-      <LogoutButton />
       {isSuccess && <div>{successMessage}</div>}
     </>
   );
