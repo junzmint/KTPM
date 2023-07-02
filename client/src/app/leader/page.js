@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/navbar";
-
+import BlueButton from "@/components/button/blue-button";
+import DoughnutChart from "@/components/chart/doughnut-chart";
 const Dashboard = () => {
     const [statistic, setStatistic] = useState([]);
     const [citizen, setCitizen] = useState([]);
@@ -68,6 +70,7 @@ const Dashboard = () => {
             <div className="flex-auto w-1/5 bg-slate-500">
                 <Navbar data={jobMenu}/>
             </div>
+
             <div className="flex-auto w-4/5 justify-center ">
               <div class="grid grid-column-5 grid-flow-col gap-8 justify-center bg-blue-700 pt-10 pb-2">
                 <div class="box-border h-20 w-48 p-4 border-2 drop-shadow-md hover:drop-shadow-2xl bg-slate-100 md:rounded-lg">
@@ -91,11 +94,23 @@ const Dashboard = () => {
                   <h2 className="font-bold">{statistic.deathTotal}</h2>
                 </div> 
               </div>
+              <div>
 
-              <div className="overflow-x-auto rounded drop-shadow-md stroke-1 w-5/6">
+              </div>
+              
+              <div className="grid grid-column-2 grid-flow-col gap-8 ">
+
+                  <div className="grid justify-center place-items-center">
+                    <DoughnutChart >
+                    </DoughnutChart>
+                  </div>
+
+                  <div>
+                      <div className="overflow-x-auto rounded drop-shadow-md stroke-1 w-5/6" >
               <table className="flex-auto !border-none	 min-w-full drop-shadow-md mt-4">
                         <thead className="bg-white border-b">
                             <tr className="bg-gray-100 border-b">
+
                               <th
                                 scope="col"
                                 colSpan="3"
@@ -103,6 +118,19 @@ const Dashboard = () => {
                               >
                                 Danh sách nhân khẩu 
                               </th>
+
+                                          <th
+                                            scope="col"
+                                            className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left flex justify-end"
+                                          >
+                                              <Link
+                                              href={{
+                                                pathname: "leader/citizen/"
+                                              }}
+                                            >
+                                              <BlueButton text="Xem"></BlueButton>
+                                            </Link>
+                                          </th>
                             </tr>
 
                             <tr>
@@ -114,12 +142,14 @@ const Dashboard = () => {
                                 </th>
                                 <th 
                                     scope="col"
+                                                colSpan="2"
                                     className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left"
                                 >
                                     Name
                                 </th>
                                 <th 
                                     scope="col"
+                                                colSpan="2"
                                     className="text-sm font-medium !border-none text-gray-900 px-6 py-4 text-left"
                                 >
                                     Gender
@@ -128,19 +158,23 @@ const Dashboard = () => {
                         </thead>
                         <tbody>
                           {citizen.map((unit, index) => (
-                            <tr key={index} className="bg-gray-100 !border-none border-b">
+                                        <tr key={index} className="bg-slate-50 !border-none border-b">
                                 <td className="text-sm text-gray-900 !border-none font-medium px-6 py-4 whitespace-nowrap">
                                   {index + 1}
                                 </td>
 
                                 <td
                                   scope="col"
+                                              colSpan="2"
                                   className="text-sm text-gray-900 !border-none font-medium px-6 py-4 whitespace-nowrap"
                                 >
                                   {unit.name.firstName + " " + unit.name.lastName}
                                 </td>
 
-                                <td className="px-6 py-4 whitespace-nowrap text-sm !border-none font-medium text-gray-900">
+                                            <td
+                                              colSpan="3" 
+                                              className="px-6 py-4 whitespace-nowrap text-sm !border-none font-medium text-gray-900"
+                                              >
                                   {unit.gender}
                                 </td>
                             </tr>
@@ -148,6 +182,11 @@ const Dashboard = () => {
                         </tbody>
                     </table>
                     </div>
+                  </div>
+
+            </div>
+
+
             </div>
         </div>
     );
