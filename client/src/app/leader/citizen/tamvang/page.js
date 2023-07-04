@@ -151,7 +151,7 @@ const Dashboard = () => {
                     <div className="flex mr-6">
                       <Link
                         href={{
-                          pathname: "absence/nhankhau/" + unit._id,
+                          pathname: "tamvang/" + unit._id,
                         }}
                       >
                         <BlueButton text="Xem"></BlueButton>

@@ -136,7 +136,7 @@ const Dashboard = () => {
                   <td
                     className="text-sm text-gray-900 !border-none font-medium px-6 py-4 whitespace-nowrap"
                   >
-                    {unit.citizen_id.name.firstName + " " + unit.citizen_id.name.lastName}
+                    {unit.citizen_id?.name.firstName + " " + unit.citizen_id?.name.lastName}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm !border-none font-medium text-gray-900">
                     {unit.date.from.substr(0,10)}

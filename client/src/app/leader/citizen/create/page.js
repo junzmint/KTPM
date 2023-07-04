@@ -60,7 +60,7 @@ const CreateNewForm = () => {
     } else {
       const data = await response.json();
       setIsSuccess(true);
-      setSuccessMessage(data.error.message);
+      // setSuccessMessage(data.error.message);
       setCitizen(inputData);
     }
   };
