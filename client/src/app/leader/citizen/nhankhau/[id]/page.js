@@ -102,7 +102,7 @@ const Dashboard = ({ params }) => {
             </span>
           </div>
           <div className="ml-4">
-            <p>Căn cước công dân: {citizenCard.card_id} </p>
+            <p>Căn cước công dân: {citizenCard?.card_id} </p>
             <p>Ngày sinh: {citizenDoB} </p>
             <p>Hộ chiếu: {citizenDetail.passport_id}</p>
             <p>Quê quán: {citizenDetail.hometown}</p>
