@@ -36,19 +36,19 @@ const Dashboard = () => {
     data: [
       {
         id: 1,
-        name: "Dashboard",
+        name: "Trang chủ",
         path: "/leader",
         auth: userRoles,
       },
       {
         id: 2,
-        name: "Citizen",
+        name: "Công dân",
         path: "/leader/citizen",
         auth: userRoles,
       },
       {
         id: 3,
-        name: "Household",
+        name: "Hộ khẩu",
         path: "/leader/household",
         auth: userRoles,
       },
@@ -76,7 +76,7 @@ const Dashboard = () => {
           </button>
         </Link>
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full p-10 mt-16 mr-2">
-          Xanh cỏ
+          Đã mất
         </button>
         <div className="overflow-x-auto rounded drop-shadow-md stroke-1 w-5/6">
           <table className="flex-auto !border-none	 min-w-full drop-shadow-md mt-4">
@@ -143,7 +143,7 @@ const Dashboard = () => {
                     colSpan="4"
                     className="text-sm text-gray-900 !border-none font-medium py-4 pxgi-6 whitespace-nowrap flex justify-end"
                   >
-                    <div className="flex mr-">
+                    <div className="flex mr-6">
                       <Link
                         href={{
                           pathname: "nhankhau/" + unit.citizen_id._id,

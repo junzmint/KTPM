@@ -18,19 +18,19 @@ const CreateNewForm = () => {
     data: [
       {
         id: 1,
-        name: "Dashboard",
+        name: "Trang chủ",
         path: "/leader",
         auth: userRoles,
       },
       {
         id: 2,
-        name: "Citizen",
+        name: "Công dân",
         path: "/leader/citizen",
         auth: userRoles,
       },
       {
         id: 3,
-        name: "Household",
+        name: "Hộ khẩu",
         path: "/leader/household",
         auth: userRoles,
       },
@@ -44,9 +44,6 @@ const CreateNewForm = () => {
       <div className="flex w-4/5 bg-slate-100  justify-center">
         <div className="bg-white mt-24 ml-8 mb-8 mr-8 px-6 py-8 rounded shadow-md text-black w-full">
           <h1 className="mb-2 text-4xl font-bold text-center">Tạo tạm trú</h1>
-          <h3 className="mb-12 text-xl font-bold text-center text-slate-600">
-            {citizenName.firstName} {citizenName.lastName}
-          </h3>
           <div
             ml-24
             w-4
