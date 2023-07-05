@@ -1,13 +1,13 @@
-'use client';
-import Navbar from '@/components/navbar';
-import React, { useState, useEffect } from 'react';
+"use client";
+import Navbar from "@/components/navbar";
+import React, { useState, useEffect } from "react";
 
 const HouseholdTransaction = ({ params }) => {
-  const [fee_id, setfee_id] = useState('');
-  const [amount, setAmount] = useState('');
-  const [stage, setStage] = useState('');
+  const [fee_id, setfee_id] = useState("");
+  const [amount, setAmount] = useState("");
+  const [stage, setStage] = useState("");
 
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
 
   const [householdTransaction, setHouseholdTransaction] = useState([]);
@@ -19,75 +19,76 @@ const HouseholdTransaction = ({ params }) => {
     data: [
       {
         id: 1,
-        name: 'Trang chủ',
-        path: '/accountant',
+        name: "Trang chủ",
+        path: "/accountant",
       },
       {
         id: 2,
-        name: 'Khoản phí - đóng góp',
-        path: '/accountant/fee',
+        name: "Khoản phí - đóng góp",
+        path: "/accountant/fee",
       },
       {
         id: 3,
-        name: 'Khoản thu',
-        path: '/accountant/transaction',
+        name: "Khoản thu",
+        path: "/accountant/transaction",
       },
     ],
   };
 
   const createDonation = async (event) => {
     event.preventDefault();
-    const token =
-      localStorage.getItem('access_token') ||
-      sessionStorage.getItem('access_token');
-    const response = await fetch(
-      `http://localhost:4000/transaction/donate/${params._id}`,
-      {
-        method: 'POST',
-        body: JSON.stringify({ fee_id, amount, stage }),
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    console.log({ fee_id: fee_id, amount: amount, stage: stage });
+    // const token =
+    //   localStorage.getItem('access_token') ||
+    //   sessionStorage.getItem('access_token');
+    // const response = await fetch(
+    //   `http://localhost:4000/transaction/donate/${params._id}`,
+    //   {
+    //     method: 'POST',
+    //     body: JSON.stringify({ fee_id, amount, stage }),
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   }
+    // );
 
-    const data = await response.json();
-    if (response.ok) {
-      
-        donation.forEach((data) =>{
-          if(data._id === fee_id){
-            donationTransaction.push({status: amount,fee:{name:data.name},year:"2023"});
-          }
-        })
-      setIsSuccess(true);
-      setSuccessMessage(data.message);
-      window.alert(successMessage);
-    } else {
-      setSuccessMessage(data.errors.message);
-      setIsSuccess(true);
-      window.alert(successMessage);
-    }
-    setfee_id('');
-    setAmount('');
-    setStage('');
-    setShowModal(false);
+    // const data = await response.json();
+    // if (response.ok) {
+
+    //     donation.forEach((data) =>{
+    //       if(data._id === fee_id){
+    //         donationTransaction.push({status: amount,fee:{name:data.name},year:"2023"});
+    //       }
+    //     })
+    //   setIsSuccess(true);
+    //   setSuccessMessage(data.message);
+    //   window.alert(successMessage);
+    // } else {
+    //   setSuccessMessage(data.errors.message);
+    //   setIsSuccess(true);
+    //   window.alert(successMessage);
+    // }
+    // setfee_id('');
+    // setAmount('');
+    // setStage('');
+    // setShowModal(false);
   };
 
   const getDonationList = async () => {
     const token =
-      localStorage.getItem('access_token') ||
-      sessionStorage.getItem('access_token');
+      localStorage.getItem("access_token") ||
+      sessionStorage.getItem("access_token");
     try {
-      const response = await fetch('http://localhost:4000/fee/list', {
-        method: 'GET',
+      const response = await fetch("http://localhost:4000/fee/list", {
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       const data = await response.json();
       const donationList = data.data.list.donation;
-      setDonation(donationList);
+      setDonation([{ name: "Chọn một khoản phí", id: 0 }, ...donationList]);
     } catch (e) {
       console.error(e);
     }
@@ -95,14 +96,14 @@ const HouseholdTransaction = ({ params }) => {
 
   const unpayFee = async ({ _id }) => {
     const token =
-      localStorage.getItem('access_token') ||
-      sessionStorage.getItem('access_token');
+      localStorage.getItem("access_token") ||
+      sessionStorage.getItem("access_token");
     const response = await fetch(
       `http://localhost:4000/transaction/unpay/${_id}`,
       {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -129,14 +130,14 @@ const HouseholdTransaction = ({ params }) => {
 
   const payFee = async ({ _id }) => {
     const token =
-      localStorage.getItem('access_token') ||
-      sessionStorage.getItem('access_token');
+      localStorage.getItem("access_token") ||
+      sessionStorage.getItem("access_token");
     const response = await fetch(
       `http://localhost:4000/transaction/pay/${_id}`,
       {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -163,13 +164,13 @@ const HouseholdTransaction = ({ params }) => {
   useEffect(() => {
     (async () => {
       const token =
-        localStorage.getItem('access_token') ||
-        sessionStorage.getItem('access_token');
+        localStorage.getItem("access_token") ||
+        sessionStorage.getItem("access_token");
       try {
         const response = await fetch(
           `http://localhost:4000/transaction/list/${params._id}`,
           {
-            method: 'GET',
+            method: "GET",
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -215,11 +216,9 @@ const HouseholdTransaction = ({ params }) => {
                     <div className="flex items-start justify-between p-5 border-b border-solid rounded-t border-slate-200">
                       <div className="relative w-full">
                         <select
-                          onChange={(event) => {
-                            console.log(fee_id);
-                            setfee_id(event.target.value);
-                          }}
+                          onChange={(event) => setfee_id(event.target.value)}
                           className="rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                          defaultValue="Chọn khoản phí"
                         >
                           {donation.map((d) => (
                             <option key={d.name} value={d._id}>
@@ -242,7 +241,7 @@ const HouseholdTransaction = ({ params }) => {
                           type="text"
                           id="floating_filled"
                           value={amount}
-                          onChange={(event) => {setAmount(event.target.value);console.log(amount)}}
+                          onChange={(event) => setAmount(event.target.value)}
                           className="rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                           placeholder=" "
                         />
@@ -261,7 +260,7 @@ const HouseholdTransaction = ({ params }) => {
                           type="text"
                           id="floating_filled"
                           value={stage}
-                          onChange={(event) => {setStage(event.target.value);console.log(stage)}}
+                          onChange={(event) => setStage(event.target.value)}
                           className="rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                           placeholder=" "
                         />
@@ -388,18 +387,19 @@ const HouseholdTransaction = ({ params }) => {
                           Thu phí
                         </button>
                       )}
-                      {unit.remain === 0 ? (<button
-                        type="button"
-                        onClick={() => unpayFee(unit)}
-                        className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 "
-                      >
-                        Hoàn tác thu phí
-                      </button>):(
+                      {unit.remain === 0 ? (
+                        <button
+                          type="button"
+                          onClick={() => unpayFee(unit)}
+                          className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 "
+                        >
+                          Hoàn tác thu phí
+                        </button>
+                      ) : (
                         <label className="text-white bg-blue-700  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-grey-600 dark:hover:bg-grey-700 ">
                           Chưa thu phí
                         </label>
-                      )
-                      }
+                      )}
                     </div>
                   </td>
                 </tr>
