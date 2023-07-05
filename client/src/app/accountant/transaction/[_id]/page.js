@@ -1,7 +1,7 @@
 "use client";
 import Navbar from "@/components/navbar";
 import React, { useState, useEffect } from "react";
-
+import Modal from "@/components/submit-modal";
 const HouseholdTransaction = ({ params }) => {
   const [fee_id, setfee_id] = useState("");
   const [amount, setAmount] = useState("");
@@ -15,6 +15,9 @@ const HouseholdTransaction = ({ params }) => {
   const [showModal, setShowModal] = useState(false);
 
   const [donation, setDonation] = useState([]);
+  const closeModal = () => {
+    setIsSuccess(false);
+  };
   const jobMenu = {
     data: [
       {
@@ -37,42 +40,42 @@ const HouseholdTransaction = ({ params }) => {
 
   const createDonation = async (event) => {
     event.preventDefault();
-    console.log({ fee_id: fee_id, amount: amount, stage: stage });
-    // const token =
-    //   localStorage.getItem('access_token') ||
-    //   sessionStorage.getItem('access_token');
-    // const response = await fetch(
-    //   `http://localhost:4000/transaction/donate/${params._id}`,
-    //   {
-    //     method: 'POST',
-    //     body: JSON.stringify({ fee_id, amount, stage }),
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   }
-    // );
+    const token =
+      localStorage.getItem("access_token") ||
+      sessionStorage.getItem("access_token");
+    const response = await fetch(
+      `http://localhost:4000/transaction/donate/${params._id}`,
+      {
+        method: "POST",
+        body: JSON.stringify({ fee_id, amount, stage }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-    // const data = await response.json();
-    // if (response.ok) {
-
-    //     donation.forEach((data) =>{
-    //       if(data._id === fee_id){
-    //         donationTransaction.push({status: amount,fee:{name:data.name},year:"2023"});
-    //       }
-    //     })
-    //   setIsSuccess(true);
-    //   setSuccessMessage(data.message);
-    //   window.alert(successMessage);
-    // } else {
-    //   setSuccessMessage(data.errors.message);
-    //   setIsSuccess(true);
-    //   window.alert(successMessage);
-    // }
-    // setfee_id('');
-    // setAmount('');
-    // setStage('');
-    // setShowModal(false);
+    const data = await response.json();
+    if (response.ok) {
+      donation.forEach((data) => {
+        if (data._id === fee_id) {
+          donationTransaction.push({
+            status: amount,
+            fee: { name: data.name },
+            year: "2023",
+          });
+        }
+      });
+      setIsSuccess(true);
+      setSuccessMessage(data.message);
+    } else {
+      setSuccessMessage(data.errors.message);
+      setIsSuccess(true);
+    }
+    setfee_id("");
+    setAmount("");
+    setStage("");
+    setShowModal(false);
   };
 
   const getDonationList = async () => {
@@ -191,6 +194,13 @@ const HouseholdTransaction = ({ params }) => {
       </div>
       <div className="flex justify-center w-4/5 bg-blue">
         <div className="w-4/5 overflow-x-auto rounded stroke-1 drop-shadow-md">
+          {isSuccess && (
+            <Modal
+              modalContent={"Tạo khoản phí thành công"}
+              closeModal={closeModal}
+            ></Modal>
+          )}
+
           <div className="flex-auto !border-none	  drop-shadow-md mt-20 bg-gray-100 px-8 py-6">
             <button
               type="button"
