@@ -45,19 +45,19 @@ function HouseholdDetailPage({ params }) {
         data: [
             {
                 id: 1,
-                name: "Dashboard",
+                name: "Trang chủ",
                 path: "/leader",
                 auth: userRoles,
             },
             {
                 id: 2,
-                name: "Citizen",
+                name: "Nhân khẩu",
                 path: "/leader/citizen",
                 auth: userRoles,
             },
             {
                 id: 3,
-                name: "Household",
+                name: "Hộ khẩu",
                 path: "/leader/household",
                 auth: userRoles,
             },

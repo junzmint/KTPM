@@ -151,7 +151,7 @@ const Dashboard = () => {
                     colSpan="4"
                     className="text-sm text-gray-900 !border-none font-medium py-4 pxgi-6 whitespace-nowrap flex justify-end"
                   >
-                    <div className="flex">
+                    <div className="flex mr-6">
                       <Link
                         href={{
                           pathname: "tamtru/" + unit._id,
@@ -159,12 +159,7 @@ const Dashboard = () => {
                       >
                         <BlueButton text="Xem"></BlueButton>
                       </Link>
-                      <BlueButton
-                        onClick={() => {
-                          setStay(stay.splice(index - 1, 1));
-                        }}
-                        text="Xóa"
-                      ></BlueButton>
+                      {/* <BlueButton onClick={() => { setStay(stay.splice(index - 1, 1)) }} text="Xóa"></BlueButton> */}
                     </div>
                   </td>
                 </tr>

@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/navbar";
 import BlueButton from "@/components/button/blue-button";
+import UpdateButton from "@/components/button/button";
+import DelelteButton from "@/components/button/delete-button";
 
 const Dashboard = () => {
   const [citizen, setCitizen] = useState([]);
@@ -54,6 +56,32 @@ const Dashboard = () => {
       },
     ],
   };
+  const handleDelete = async ({ _id }) => {
+    console.log(_id);
+    const token =
+      localStorage.getItem("access_token") ||
+      sessionStorage.getItem("access_token");
+    try {
+      const response = await fetch(
+        `http://localhost:4000/citizen/delete/${_id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.ok) {
+        setCitizen((prevCitizen) =>
+          prevCitizen.filter((item) => item._id !== _id)
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    console.log(_id);
+  };
   return (
     <div className="flex h-screen">
       <div className="flex-auto w-1/5 bg-slate-500">
@@ -98,7 +126,7 @@ const Dashboard = () => {
                   className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left flex justify-end"
                 >
                   <Link href="citizen/create">
-                    <BlueButton text="Tạo"></BlueButton>
+                    <UpdateButton text="Tạo"></UpdateButton>
                   </Link>
                 </th>
               </tr>
@@ -153,12 +181,10 @@ const Dashboard = () => {
                       >
                         <BlueButton text="Xem"></BlueButton>
                       </Link>
-                      <BlueButton
-                        onClick={() => {
-                          setCitizen(citizen.splice(index - 1, 1));
-                        }}
+                      <DelelteButton
+                        onClick={() => handleDelete(unit)}
                         text="Xóa"
-                      ></BlueButton>
+                      ></DelelteButton>
                     </div>
                   </td>
                 </tr>

@@ -35,19 +35,19 @@ function HouseHold() {
         data: [
             {
                 id: 1,
-                name: "Dashboard",
+                name: "Trang chủ",
                 path: "/leader",
                 auth: userRoles,
             },
             {
                 id: 2,
-                name: "Citizen",
+                name: "Công dân",
                 path: "/leader/citizen",
                 auth: userRoles,
             },
             {
                 id: 3,
-                name: "Household",
+                name: "Hộ khẩu",
                 path: "/leader/household",
                 auth: userRoles,
             },
@@ -74,7 +74,9 @@ function HouseHold() {
 
                                 </th>
                                 <th scope="col" className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left flex justify-end">
-                                    <Button text="Tạo" color="yellow"></Button>
+                                    <Link href={{
+                                        pathname: './addnewhousehold',
+                                    }}><Button text="Tạo" color="green"></Button></Link>
                                 </th>
                             </tr>
                             <tr className="bg-white border-b">

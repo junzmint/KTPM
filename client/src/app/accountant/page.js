@@ -6,17 +6,17 @@ const Dashboard = () => {
     data: [
       {
         id: 1,
-        name: "Dashboard",
+        name: "Trang chủ",
         path: "/accountant",
       },
       {
         id: 2,
-        name: "Fee",
+        name: "Khoản phí - đóng góp",
         path: "/accountant/fee",
       },
       {
         id: 3,
-        name: "Transaction",
+        name: "Khoản thu",
         path: "/accountant/transaction",
       },
     ],
@@ -66,7 +66,7 @@ const Dashboard = () => {
                     colSpan="8"
                     className="!border-none text-xl font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    BẢNG THỐNG KÊ CÁC KHOẢN THU HÀNG THÁNG
+                    BẢNG THỐNG KÊ CÁC KHOẢN THU TRONG NĂM
                   </th>
                   {/* <th
                     scope="col"

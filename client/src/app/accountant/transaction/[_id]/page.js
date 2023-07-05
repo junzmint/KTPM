@@ -19,17 +19,17 @@ const HouseholdTransaction = ({ params }) => {
     data: [
       {
         id: 1,
-        name: 'Dashboard',
+        name: 'Trang chủ',
         path: '/accountant',
       },
       {
         id: 2,
-        name: 'Fee',
+        name: 'Khoản phí - đóng góp',
         path: '/accountant/fee',
       },
       {
         id: 3,
-        name: 'Transaction',
+        name: 'Khoản thu',
         path: '/accountant/transaction',
       },
     ],

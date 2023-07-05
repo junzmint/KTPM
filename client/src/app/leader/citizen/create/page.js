@@ -114,9 +114,9 @@ const CreateNewForm = () => {
                 <input
                   type="text"
                   class="block border border-grey-light w-full p-3 rounded mb-4"
-                  name="lastName"
+                  name="firstName"
                   placeholder="Họ"
-                  value={citizen.lastName}
+                  value={citizen.firstName}
                   onChange={handleChange}
                 />
                 <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -182,9 +182,9 @@ const CreateNewForm = () => {
                 <input
                   type="text"
                   class="block border border-grey-light w-full p-3 rounded mb-4"
-                  name="firstName"
+                  name="lastName"
                   placeholder="Ten"
-                  value={citizen.firstName}
+                  value={citizen.lastName}
                   onChange={handleChange}
                 />
                 <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -246,7 +246,7 @@ const CreateNewForm = () => {
             </div>
           </div>
           <div class="text-center text-sm text-grey-dark mt-4">
-            <BlueButton text="Cập nhật" onClick={handleSubmit}></BlueButton>
+            <BlueButton text="Tạo công dân" onClick={handleSubmit}></BlueButton>
           </div>
           {isSuccess && <div>{successMessage}</div>}
         </div>
