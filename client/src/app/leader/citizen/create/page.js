@@ -194,7 +194,7 @@ const CreateNewForm = () => {
                   type="text"
                   class="block border border-grey-light w-full p-3 rounded mb-4"
                   name="card_id"
-                  placeholder="12 so thoi nhe"
+                  placeholder="12 so"
                   value={citizen.card_id}
                   onChange={handleChange}
                 />
@@ -205,7 +205,7 @@ const CreateNewForm = () => {
                   type="text"
                   class="block border border-grey-light w-full p-3 rounded mb-4"
                   name="passport_id"
-                  placeholder="8 chữ số thôi nha"
+                  placeholder="8 chữ số "
                   value={citizen.passport_id}
                   onChange={handleChange}
                 />
@@ -216,7 +216,7 @@ const CreateNewForm = () => {
                   type="text"
                   class="block border border-grey-light w-full p-3 rounded mb-4"
                   name="gender"
-                  placeholder="Giới tính"
+                  placeholder="MALE / FEMALE / OTHER"
                   value={citizen.gender}
                   onChange={handleChange}
                 />
