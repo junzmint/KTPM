@@ -151,40 +151,41 @@ const CreateNewForm = () => {
               <div className="flex space-x-12">
                 <div className="mr-8 w-full">
                   <label class="block text-gray-700 text-sm font-bold mb-2">
-                    From
+                    Từ ngày
                   </label>
                   <input
                     type="text"
                     class="block border border-grey-light w-full p-3 rounded mb-4"
                     name="from"
-                    placeholder="From"
+                    placeholder="Y-M-D"
                     value={citizen.date.from}
                     onChange={handleChangeDate}
                   />
                 </div>
                 <div className="w-full">
                   <label class="block text-gray-700 text-sm font-bold mb-2">
-                    To
+                    Đến ngày
                   </label>
                   <input
                     type="text"
                     class="block border border-grey-light w-full p-3 rounded mb-4"
                     name="to"
-                    placeholder="To"
+                    placeholder="Y-M-D"
                     value={citizen.date.to}
                     onChange={handleChangeDate}
                   />
                 </div>
               </div>
               <label class="block text-gray-700 text-sm font-bold mb-2">
-                Ly do
+                Lý do
               </label>
               <div className="w-full">
                 <input
                   type="text"
                   className="block border border-grey-light w-full p-3 rounded mb-4"
                   name="reason"
-                  placeholder="Ly do"
+                  placeholder="Lý do"
+                  value={citizen.reason}
                   onChange={handleChange}
                 />
               </div>
@@ -192,10 +193,11 @@ const CreateNewForm = () => {
             <div className="flex items-center w-full"></div>
             <div class="text-center text-sm text-grey-dark mt-4">
               <BlueButton
-                text="Tao tam tru"
+                text="Tạo"
                 onClick={handleSubmit}
               ></BlueButton>
             </div>
+            {isSuccess && <div>{successMessage}</div>}
           </div>
         </div>
       </div>
