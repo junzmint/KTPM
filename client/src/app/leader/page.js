@@ -98,9 +98,9 @@ const Dashboard = () => {
 
         </div>
 
-        <div className="grid grid-column-2 grid-flow-col gap-8 ">
+        <div className="grid grid-column-2 grid-flow-col gap-8 pt-8">
 
-          <div className="grid justify-center place-items-center">
+          <div className="grid justify-center pt-4">
             <DoughnutChart >
             </DoughnutChart>
           </div>

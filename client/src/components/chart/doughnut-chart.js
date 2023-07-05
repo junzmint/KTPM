@@ -56,7 +56,7 @@ function DoughnutChart (){
     })();
   }, []);
     const data = {
-        labels : ['Male','Female', 'Other'],
+        labels : ['Nam','Nữ', 'Khác'],
         datasets: [{
             label: 'So luong',
             data : [statistic.maleTotal, statistic.femaleTotal, statistic.otherTotal],
