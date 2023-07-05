@@ -60,7 +60,7 @@ const CreateNewForm = () => {
     } else {
       const data = await response.json();
       setIsSuccess(true);
-      setSuccessMessage(data.error.message);
+      // setSuccessMessage(data.error.message);
       setCitizen(inputData);
     }
   };
@@ -74,13 +74,13 @@ const CreateNewForm = () => {
       },
       {
         id: 2,
-        name: "Nhân khẩu",
+        name: "Công dân",
         path: "/leader/citizen",
         auth: userRoles,
       },
       {
         id: 3,
-        name: "Hộ dân cư",
+        name: "Hộ khẩu",
         path: "/leader/household",
         auth: userRoles,
       },

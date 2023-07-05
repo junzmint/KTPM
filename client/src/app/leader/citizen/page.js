@@ -44,13 +44,13 @@ const Dashboard = () => {
       },
       {
         id: 2,
-        name: "Nhân khẩu",
+        name: "Công dân",
         path: "/leader/citizen",
         auth: userRoles,
       },
       {
         id: 3,
-        name: "Hộ dân cư",
+        name: "Hộ khẩu",
         path: "/leader/household",
         auth: userRoles,
       },

@@ -60,8 +60,8 @@ const UpdateCitizen = (params) => {
             passport_id: citizenCheck.passport_id,
             gender: citizenCheck.gender,
             dob: citizenCheck.dob.substr(0, 10),
-            card_id: citizenCheck.card_id.card_id,
-            location: citizenCheck.card_id.location,
+            card_id: citizenCheck.card_id?.card_id,
+            location: citizenCheck.card_id?.location,
             firstName: citizenCheck.name.firstName,
             lastName: citizenCheck.name.lastName,
             hometown: citizenCheck.hometown,
@@ -105,12 +105,10 @@ const UpdateCitizen = (params) => {
       const data = await response.json();
       setIsSuccess(true);
       setSuccessMessage(data.message);
-      setCitizen(inputData);
     } else {
       const data = await response.json();
       setIsSuccess(true);
       //setSuccessMessage(data.error.message);
-      setCitizen(inputData);
     }
   };
   const jobMenu = {
@@ -123,13 +121,13 @@ const UpdateCitizen = (params) => {
       },
       {
         id: 2,
-        name: "Nhân khẩu",
+        name: "Công dân",
         path: "/leader/citizen",
         auth: userRoles,
       },
       {
         id: 3,
-        name: "Hộ dân cư",
+        name: "Hộ khẩu",
         path: "/leader/household",
         auth: userRoles,
       },

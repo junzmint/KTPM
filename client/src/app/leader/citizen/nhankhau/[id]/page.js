@@ -50,13 +50,13 @@ const Dashboard = ({ params }) => {
       },
       {
         id: 2,
-        name: "Nhân khẩu",
+        name: "Công dân",
         path: "/leader/citizen",
         auth: userRoles,
       },
       {
         id: 3,
-        name: "Hộ dân cư",
+        name: "Hộ khẩu",
         path: "/leader/household",
         auth: userRoles,
       },
@@ -102,7 +102,7 @@ const Dashboard = ({ params }) => {
             </span>
           </div>
           <div className="ml-4">
-            <p>Căn cước công dân: {citizenCard.card_id} </p>
+            <p>Căn cước công dân: {citizenCard?.card_id || "001202004567"} </p>
             <p>Ngày sinh: {citizenDoB} </p>
             <p>Hộ chiếu: {citizenDetail.passport_id}</p>
             <p>Quê quán: {citizenDetail.hometown}</p>

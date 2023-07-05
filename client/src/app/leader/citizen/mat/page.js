@@ -42,13 +42,13 @@ const Dashboard = () => {
       },
       {
         id: 2,
-        name: "Nhân khẩu",
+        name: "Công dân",
         path: "/leader/citizen",
         auth: userRoles,
       },
       {
         id: 3,
-        name: "Hộ dân cư",
+        name: "Hộ khẩu",
         path: "/leader/household",
         auth: userRoles,
       },
@@ -143,10 +143,10 @@ const Dashboard = () => {
                     colSpan="4"
                     className="text-sm text-gray-900 !border-none font-medium py-4 pxgi-6 whitespace-nowrap flex justify-end"
                   >
-                    <div className="flex mr-">
+                    <div className="flex mr-6">
                       <Link
                         href={{
-                          pathname: "nhankhau/" + unit.citizen_id._id,
+                          pathname: "mat/" + unit._id,
                         }}
                       >
                         <BlueButton text="Xem"></BlueButton>

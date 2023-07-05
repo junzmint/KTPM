@@ -42,13 +42,13 @@ const Dashboard = () => {
       },
       {
         id: 2,
-        name: "Nhân khẩu",
+        name: "Công dân",
         path: "/leader/citizen",
         auth: userRoles,
       },
       {
         id: 3,
-        name: "Hộ dân cư",
+        name: "Hộ khẩu",
         path: "/leader/household",
         auth: userRoles,
       },
@@ -75,7 +75,7 @@ const Dashboard = () => {
         </Link>
         <Link href="/leader/citizen/mat">
           <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full p-10 mr-2">
-            Xanh cỏ
+            Đã mất
           </button>
         </Link>
         <div className="overflow-x-auto rounded drop-shadow-md stroke-1 w-5/6">
@@ -134,9 +134,9 @@ const Dashboard = () => {
                     {index + 1}
                   </td>
                   <td className="text-sm text-gray-900 !border-none font-medium px-6 py-4 whitespace-nowrap">
-                    {unit.citizen_id.name.firstName +
+                    {unit.citizen_id?.name.firstName +
                       " " +
-                      unit.citizen_id.name.lastName}
+                      unit.citizen_id?.name.lastName}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm !border-none font-medium text-gray-900">
                     {unit.date.from.substr(0, 10)}

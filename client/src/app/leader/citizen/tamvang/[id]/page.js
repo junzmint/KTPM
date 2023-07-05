@@ -17,7 +17,7 @@ const CreateNewForm = (params) => {
         sessionStorage.getItem("access_token");
       try {
         const response = await fetch(
-          `http://localhost:4000/death/detail/${params.params.id}`,
+          `http://localhost:4000/absence/get/${params.params.id}`,
           {
             method: "GET",
             headers: {
@@ -27,11 +27,10 @@ const CreateNewForm = (params) => {
         );
 
         const data = await response.json();
-        const citizen = data.data.death;
-        console.log(citizen);
+        const citizen = data.data.absence;
         setCitizen(citizen.citizen_id);
         setCitizenName(citizen.citizen_id.name);
-        setCitizenDate(citizen.date.substr(0, 10));
+        setCitizenDate(citizen.date);
         setCitizenReason(citizen.reason);
 
         setUserRoles(localStorage.role);
@@ -69,7 +68,9 @@ const CreateNewForm = (params) => {
       </div>
       <div className="flex w-4/5 bg-slate-100  justify-center">
         <div className="bg-white mt-24 ml-8 mb-24 mr-8 px-6 py-8 rounded-xl shadow-md text-black w-full">
-          <h1 className="mb-2 text-4xl font-bold text-center">Xem thông tin</h1>
+          <h1 className="mb-2 text-4xl font-bold text-center">
+            Xem tạm vắng
+          </h1>
           <h3 className="mb-12 text-xl font-bold text-center text-slate-600">
             {citizenName.firstName} {citizenName.lastName}
           </h3>
@@ -90,34 +91,40 @@ const CreateNewForm = (params) => {
                 <label class="block text-gray-700 text-sm font-bold mb-2">
                   Giới tính
                 </label>
-                <label class="block border border-grey-light w-full p-3 rounded mb-4">
-                  {citizen.gender}
+                <label
+                  class="block border border-grey-light w-full p-3 rounded mb-4"
+                >{citizen.gender}</label>
+                <label class="block text-gray-700 text-sm font-bold mb-2">
+                  From
                 </label>
+                <label
+                  class="block border border-grey-light w-full p-3 rounded mb-4"
+                >{citizenDate.from}</label>
               </div>
               <div className="w-full">
                 <label class="block text-gray-700 text-sm font-bold mb-2">
                   Dia chi
                 </label>
-                <label class="block border border-grey-light w-full p-3 rounded mb-4">
-                  {citizen.accommodation}
+                <label
+                  class="block border border-grey-light w-full p-3 rounded mb-4"
+                >{citizen.accommodation}</label>
+                <label class="block text-gray-700 text-sm font-bold mb-2">
+                  To
                 </label>
+                <label
+                  class="block border border-grey-light w-full p-3 rounded mb-4"
+                >{citizenDate.to}</label>
               </div>
             </div>
-            <label class="block text-gray-700 text-sm font-bold mb-2">
-              Ngày mất
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Ly do
             </label>
             <div className="w-full">
-              <label class="block border border-grey-light w-full p-3 rounded mb-4">
-                {citizenDate}
-              </label>
-            </div>
-            <label class="block text-gray-700 text-sm font-bold mb-2">
-              Lý do
-            </label>
-            <div className="w-full">
-              <label class="block border border-grey-light w-full p-3 rounded mb-4">
-                {citizenReason}
-              </label>
+            <label
+                  class="block border border-grey-light w-full p-3 rounded mb-4"
+                >{citizenReason}</label>
             </div>
           </div>
           <div class="text-center text-sm text-grey-dark mt-4">

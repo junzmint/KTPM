@@ -82,7 +82,7 @@ const LoginForm = () => {
                 className="border border-gray-300 text-red-600 shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50"
               />
               <label
-                for="remember_me"
+                htmlFor="remember_me"
                 className="ml-2 block text-sm leading-5 text-gray-900"
               >
                 {" "}
