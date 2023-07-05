@@ -4,6 +4,7 @@ import Navbar from "@/components/navbar";
 import BlueButton from "@/components/button/blue-button";
 import { nanoid } from "nanoid";
 
+
 const CreateNewForm = () => {
   const inputData = {
     citizen_id: "",
@@ -22,7 +23,8 @@ const CreateNewForm = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const code = nanoid(5);
-  citizen.code = code;
+  citizen.code = code;  
+
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -73,7 +75,7 @@ const CreateNewForm = () => {
     const token =
       localStorage.getItem("access_token") ||
       sessionStorage.getItem("access_token");
-    const response = await fetch("http://localhost:4000/stay/create", {
+    const response = await fetch("http://localhost:4000/absence/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -124,7 +126,7 @@ const CreateNewForm = () => {
       </div>
       <div className="flex w-4/5 bg-slate-100  justify-center">
         <div className="bg-white mt-24 ml-8 mb-8 mr-8 px-6 py-8 rounded shadow-md text-black w-full">
-          <h1 className="mb-2 text-4xl font-bold text-center">Tạo tạm trú</h1>
+          <h1 className="mb-2 text-4xl font-bold text-center">Tạo tạm vắng</h1>
           <div
             ml-24
             w-4
