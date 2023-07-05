@@ -98,7 +98,9 @@ const Dashboard = () => {
                   scope="col"
                   className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left flex justify-end"
                 >
-                  <UpdateButton text="Tạo"></UpdateButton>
+                  <Link href="mat/create">
+                    <UpdateButton text="Tạo"></UpdateButton>
+                  </Link>
                 </th>
               </tr>
               <tr className="bg-white border-b">
@@ -138,7 +140,7 @@ const Dashboard = () => {
                     colSpan="5"
                     className="px-6 py-4 whitespace-nowrap text-sm !border-none font-medium text-gray-900"
                   >
-                    {unit.date.substr(0,10)}
+                    {unit.date.substr(0, 10)}
                   </td>
                   <td
                     colSpan="4"
