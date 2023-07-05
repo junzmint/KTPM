@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/navbar";
 import BlueButton from "@/components/button/blue-button";
+import UpdateButton from "@/components/button/button";
 
 const Dashboard = () => {
   const [death, setDeath] = useState([]);
@@ -97,7 +98,7 @@ const Dashboard = () => {
                   scope="col"
                   className="!border-none text-lg font-medium text-gray-900 px-6 py-4 text-left flex justify-end"
                 >
-                  <BlueButton text="Tạo"></BlueButton>
+                  <UpdateButton text="Tạo"></UpdateButton>
                 </th>
               </tr>
               <tr className="bg-white border-b">
