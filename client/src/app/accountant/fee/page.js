@@ -15,6 +15,7 @@ const Fee = () => {
   const [showModalCreate, setShowModalCreate] = useState(false);
   const [updateUnit, setUpdateUnit] = useState();
   const [showModalUpdate, setShowModalUpdate] = useState(false);
+  const [showModalUpdate2, setShowModalUpdate2] = useState(false);
 
   const [name, setName] = useState('');
   const [required, setRequired] = useState('');
@@ -22,6 +23,43 @@ const Fee = () => {
 
   const [successMessage, setSuccessMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const updateDonation = async ({ _id }) => {
+    const token =
+      localStorage.getItem('access_token') ||
+      sessionStorage.getItem('access_token');
+    const response = await fetch(`http://localhost:4000/fee/update/${_id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ name, required, memberPayment }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      setIsSuccess(true);
+      setSuccessMessage(data.message);
+      donation.forEach((item) => {
+        if (item._id === _id) {
+          item.name = name;
+          item.required = required;
+          item.memberPayment = memberPayment;
+        }
+        return item;
+      });
+      setDonationList([...donation]);
+      setName('');
+      setRequired('');
+      setmemberPayment(false);
+     
+    } else {
+      setIsSuccess(true);
+      setSuccessMessage(data.errors.message);
+    }
+    setShowModalUpdate2(false);
+  };
 
   const updateFee = async ({ _id }) => {
     const token =
@@ -555,7 +593,7 @@ const Fee = () => {
                       >
                         Sửa
                       </button>
-                      {showModalUpdate ? (
+                      {showModalUpdate2 ? (
                         <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
                           <div className="relative w-auto max-w-3xl mx-auto my-6">
                             {/*content*/}
@@ -649,14 +687,14 @@ const Fee = () => {
                                 <button
                                   className="px-6 py-2 mb-1 mr-1 text-sm font-bold text-red-500 uppercase transition-all duration-150 ease-linear outline-none background-transparent focus:outline-none"
                                   type="button"
-                                  onClick={() => setShowModalUpdate(false)}
+                                  onClick={() => setShowModalUpdate2(false)}
                                 >
                                   Đóng
                                 </button>
                                 <button
                                   className="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none bg-emerald-500 active:bg-emerald-600 hover:shadow-lg focus:outline-none"
                                   type="button"
-                                  onClick={() => updateFee(updateUnit)}
+                                  onClick={() => updateDonation(updateUnit)}
                                 >
                                   Cập nhật
                                 </button>
