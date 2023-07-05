@@ -83,8 +83,8 @@ table, th, td {
 .modal {
   position: absolute;
   top: 2rem;
-  right: 10%;
-  transform: translateX(-50%);
+  right: 40%;
+  /* transform: translateX(-50%); */
   background: var(--clr-green-light);
   display: inline-block;
   padding: 0.25rem 1rem;
