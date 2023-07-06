@@ -123,11 +123,11 @@ const HouseholdTransaction = ({ params }) => {
         return item;
       });
       setHouseholdTransaction([...householdTransaction]);
-      window.alert(successMessage);
+      
     } else {
       setSuccessMessage(data.errors.message);
       setIsSuccess(true);
-      window.alert(successMessage);
+      
     }
   };
 
@@ -157,11 +157,11 @@ const HouseholdTransaction = ({ params }) => {
         return item;
       });
       setHouseholdTransaction([...householdTransaction]);
-      window.alert(successMessage);
+     
     } else {
       setSuccessMessage(data.errors.message);
       setIsSuccess(true);
-      window.alert(successMessage);
+      
     }
   };
   useEffect(() => {
@@ -196,7 +196,7 @@ const HouseholdTransaction = ({ params }) => {
         <div className="w-4/5 overflow-x-auto rounded stroke-1 drop-shadow-md">
           {isSuccess && (
             <Modal
-              modalContent={"Tạo khoản phí thành công"}
+              modalContent={successMessage}
               closeModal={closeModal}
             ></Modal>
           )}
