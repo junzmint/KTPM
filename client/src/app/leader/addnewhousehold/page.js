@@ -56,12 +56,28 @@ const AddNewHouseHold = () => {
       },
     ],
   };
-
-  const handleAddNewHousehold = () => {
-    // window.alert("Add new household successfully");
+  
+  const handleAddNewHousehold = async(e) => {
+    e.preventDefault();
+ 
     setSuccessMessage("Đã tạo hộ khẩu thành công");
     setShowModal(false);
     setIsSuccess(true);
+    setAddress({
+      no:"",
+      ward:"",
+      district:"",
+      province:"",
+    });
+    setMoveIn({
+      date:"",
+      reason:"",
+    });
+    setName("");
+    setHousehold({
+      household_id:"",
+      areaCode:"",
+    })
   };
   return (
     <div className="flex">
@@ -170,7 +186,7 @@ const AddNewHouseHold = () => {
                 placeholder="Quận"
               />
               <label className="block text-gray-700 text-sm font-bold mb-2">
-                Huyện
+                Huyện/Thành phố
               </label>
               <input
                 type="text"
@@ -178,7 +194,7 @@ const AddNewHouseHold = () => {
                 name="province"
                 onChange={handleAddressChange}
                 value={address.province}
-                placeholder="Huyện"
+                placeholder="Huyện/Thành phố"
               />
             </div>
           </div>
@@ -186,7 +202,7 @@ const AddNewHouseHold = () => {
           <div className="text-center text-sm text-grey-dark mt-4">
             <BlueButton
               onClick={() => setShowModal(true)}
-              text="Cập nhật"
+              text="Cập nhật" 
             ></BlueButton>
             {showModal ? (
               <>

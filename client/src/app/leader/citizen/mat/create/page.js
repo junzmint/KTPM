@@ -114,7 +114,7 @@ const CreateNewForm = () => {
       </div>
       <div className="flex w-4/5 bg-slate-100  justify-center">
         <div className="bg-white mt-24 ml-8 mb-8 mr-8 px-6 py-8 rounded shadow-md text-black w-full">
-          <h1 className="mb-2 text-4xl font-bold text-center">Tạo mất</h1>
+          <h1 className="mb-2 text-4xl font-bold text-center">Khai tử</h1>
           <div
             ml-24
             w-4
