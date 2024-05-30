@@ -1,6 +1,6 @@
 import "../../public/globals.css";
 import { Inter } from "next/font/google";
-
+import Navbar from "@/components/navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -9,9 +9,40 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const jobMenu = {
+    data: [
+      {
+        id: 0,
+        name: "Trang chủ",
+        path: "/",
+      },
+      {
+        id: 1,
+        name: "Chăm sóc thú cưng",
+        path: "/pet",
+      },
+      {
+        id: 2,
+        name: "Thời trang nam",
+        path: "/men-fashion",
+      },
+      {
+        id: 3,
+        name: "Sức khỏe",
+        path: "/healthcare",
+      },
+    ],
+  };
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="flex flex-row h-screen">
+          <div className="flex-auto w-1/5 bg-slate-500">
+            <Navbar data={jobMenu} />
+          </div>
+          <div className="flex-auto w-4/5 justify-center">{children}</div>
+        </div>
+      </body>
     </html>
   );
 }
