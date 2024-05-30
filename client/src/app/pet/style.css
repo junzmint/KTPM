@@ -1,0 +1,24 @@
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px; 
+  }
+
+
+.blue-button {
+    background-color: rgb(0, 208, 255);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .blue-button:hover {
+    background-color: darkblue;
+  }
+  .blue-button.selected {
+    background-color: darkblue;
+    font-weight: bold; 
+  }
