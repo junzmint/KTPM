@@ -31,6 +31,11 @@ export default function RootLayout({ children }) {
         name: "Sức khỏe",
         path: "/healthcare",
       },
+      {
+        id: 2,
+        name: "Thời trang nữ",
+        path: "/woman-fashion",
+      },
     ],
   };
   return (
