@@ -43,113 +43,124 @@ const getOptions = (title) => ({
 
 const Pet = () => {
   
+  const [selectedType, setSelectedType] = useState('negative');
   const [selectedChart, setSelectedChart] = useState('foodnoun');
 
   const {
     loading,
     data: petDataNega,
     error,
-  } = useFetch("?category=pet&type=negative"); //thay negative va positive
+  } = useFetch("?category=pet&type=negative"); 
+
+  const {
+    loading: loadingPos,
+    data: petDataPos,
+    error: errorPos,
+  } = useFetch("?category=pet&type=positive");
+
+  const petData = selectedType === 'negative' ? petDataNega : petDataPos;
 
 
-  const labelFoodNoun = petDataNega?.food_noun?.map((i) => i.item);  // gop noun va adj thanh 1 bieu do
+  const labelFoodNoun = petData?.food_noun?.map((i) => i.item);  // dinh gop noun va adj thanh 1 bieu do
   const foodNounData = {
     labels: labelFoodNoun,
     datasets: [
       {
         label: "food noun",
-        data: petDataNega?.food_noun?.map((i) => i.frequency),
+        data: petData?.food_noun?.map((i) => i.frequency),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };
 
-  const labelFoodAdj = petDataNega?.food_adj?.map((i) => i.item);
+  const labelFoodAdj = petData?.food_adj?.map((i) => i.item);
   const foodAdjData = {
     labels: labelFoodAdj,
     datasets: [
       {
         label: "food adj",
-        data: petDataNega?.food_adj?.map((i) => i.frequency),
+        data: petData?.food_adj?.map((i) => i.frequency),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };
 
-  const labelFashionNoun = petDataNega?.fashion_noun?.map((i) => i.item);
+  const labelFashionNoun = petData?.fashion_noun?.map((i) => i.item);
   const fashionNounData = {
     labels: labelFashionNoun,
     datasets: [
       {
         label: "fashion noun",
-        data: petDataNega?.fashion_noun?.map((i) => i.frequency),
+        data: petData?.fashion_noun?.map((i) => i.frequency),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };
 
-  const labelFashionAdj = petDataNega?.fashion_adj?.map((i) => i.item);
+  
+
+  const labelFashionAdj = petData?.fashion_adj?.map((i) => i.item);
   const fashionAdjData = {
     labels: labelFashionAdj,
     datasets: [
       {
         label: "fashion adj",
-        data: petDataNega?.fashion_adj?.map((i) => i.frequency),
+        data: petData?.fashion_adj?.map((i) => i.frequency),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };
 
-  const labelDrugsNoun = petDataNega?.drugs_noun?.map((i) => i.item);
+  const labelDrugsNoun = petData?.drugs_noun?.map((i) => i.item);
   const drugsNounData = {
     labels: labelDrugsNoun,
     datasets: [
       {
         label: "drugs noun",
-        data: petDataNega?.drugs_noun?.map((i) => i.frequency),
+        data: petData?.drugs_noun?.map((i) => i.frequency),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };
 
-  const labelDrugsAdj = petDataNega?.drugs_adj?.map((i) => i.item);
+  const labelDrugsAdj = petData?.drugs_adj?.map((i) => i.item);
   const drugsAdjData = {
     labels: labelDrugsAdj,
     datasets: [
       {
         label: "drugs adj",
-        data: petDataNega?.drugs_adj?.map((i) => i.frequency),
+        data: petData?.drugs_adj?.map((i) => i.frequency),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };
 
-  const labelAccNoun = petDataNega?.accessories_noun?.map((i) => i.item);
+  const labelAccNoun = petData?.accessories_noun?.map((i) => i.item);
   const accNounData = {
     labels: labelAccNoun,
     datasets: [
       {
         label: "accessories noun",
-        data: petDataNega?.accessories_noun?.map((i) => i.frequency),
+        data: petData?.accessories_noun?.map((i) => i.frequency),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };
 
-  const labelAccAdj = petDataNega?.accessories_adj?.map((i) => i.item);
+  const labelAccAdj = petData?.accessories_adj?.map((i) => i.item);
   const accAdjData = {
     labels: labelAccAdj,
     datasets: [
       {
         label: "accessories adj",
-        data: petDataNega?.accessories_adj?.map((i) => i.frequency),
+        data: petData?.accessories_adj?.map((i) => i.frequency),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
@@ -190,6 +201,27 @@ const Pet = () => {
   }
   return (
     <div>
+      <div className="button-container">
+      <button
+          className={`red-button ${selectedType === 'positive' ? 'selected' : ''}`}
+          onClick={() => {
+            setSelectedType('positive');
+            setSelectedChart('foodnoun'); 
+          }}
+        >
+          Positive
+        </button>
+        <button
+          className={`red-button ${selectedType === 'negative' ? 'selected' : ''}`}
+          onClick={() => {
+            setSelectedType('negative');
+            setSelectedChart('foodnoun'); 
+          }}
+        >
+          Negative
+        </button>
+      </div>
+
       <div className="button-container">
         <button
           className={`blue-button ${selectedChart === 'foodnoun' ? 'selected' : ''}`}
@@ -240,7 +272,7 @@ const Pet = () => {
           Accessories Adj
         </button>
       </div>
-      <div style={{ height: '600px' }}> 
+      <div > 
         <Bar options={options} data={data} />
       </div>
     </div>
