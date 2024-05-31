@@ -30,7 +30,6 @@ const getOptions = (title) => ({
     },
   },
   responsive: true,
-  maintainAspectRatio: false, 
   plugins: {
     legend: {
       position: "right",
@@ -50,10 +49,10 @@ const Pet = () => {
     loading,
     data: petDataNega,
     error,
-  } = useFetch("?category=pet&type=negative");
+  } = useFetch("?category=pet&type=negative"); //thay negative va positive
 
 
-  const labelFoodNoun = petDataNega?.food_noun?.map((i) => i.item);
+  const labelFoodNoun = petDataNega?.food_noun?.map((i) => i.item);  // gop noun va adj thanh 1 bieu do
   const foodNounData = {
     labels: labelFoodNoun,
     datasets: [
