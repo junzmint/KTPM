@@ -22,3 +22,22 @@
     background-color: darkblue;
     font-weight: bold; 
   }
+
+.red-button {
+    background-color: rgb(254, 72, 72);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+  }
+  
+  .red-button:hover {
+    background-color: darkred;
+  }
+  
+  .red-button.selected {
+    background-color: darkred;
+    font-weight: bold; /* Makes the selected button text bold */
+  }

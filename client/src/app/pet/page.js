@@ -43,160 +43,166 @@ const getOptions = (title) => ({
 
 const Pet = () => {
   
-  const [selectedType, setSelectedType] = useState('negative');
-  const [selectedChart, setSelectedChart] = useState('foodnoun');
+  const [selectedType, setSelectedType] = useState('positive');
+  const [selectedChart, setSelectedChart] = useState('food');
 
-  const {
-    loading,
-    data: petDataNega,
-    error,
-  } = useFetch("?category=pet&type=negative"); 
-
-  const {
-    loading: loadingPos,
-    data: petDataPos,
-    error: errorPos,
+  const { 
+    loading: loadingPosi, 
+    data: petDataPosi, 
+    error: errorPosi 
   } = useFetch("?category=pet&type=positive");
+  
+  const { 
+    loading: loadingNega, 
+    data: petDataNega, 
+    error: errorNega 
+  } = useFetch("?category=pet&type=negative");
+  
+  const petData = selectedType === 'positive' ? petDataPosi : petDataNega;
+  
 
-  const petData = selectedType === 'negative' ? petDataNega : petDataPos;
-
-
-  const labelFoodNoun = petData?.food_noun?.map((i) => i.item);  // dinh gop noun va adj thanh 1 bieu do
-  const foodNounData = {
+  const labelFoodNoun = petData?.food_noun?.map((i) => i.item) || [];
+  const foodNounData = labelFoodNoun.length > 0 ? {
     labels: labelFoodNoun,
     datasets: [
       {
-        label: "food noun",
+        label: "Food Noun",
         data: petData?.food_noun?.map((i) => i.frequency),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
-  };
+  } : null;
 
-  const labelFoodAdj = petData?.food_adj?.map((i) => i.item);
-  const foodAdjData = {
+  const labelFoodAdj = petData?.food_adj?.map((i) => i.item) || [];
+  const foodAdjData = labelFoodAdj.length > 0 ? {
     labels: labelFoodAdj,
     datasets: [
       {
-        label: "food adj",
+        label: "Food Adj",
         data: petData?.food_adj?.map((i) => i.frequency),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        borderColor: "rgb(75, 192, 192)",
+        backgroundColor: "rgba(153, 102, 255, 0.5)",
       },
     ],
-  };
+  } : null;
 
-  const labelFashionNoun = petData?.fashion_noun?.map((i) => i.item);
-  const fashionNounData = {
+  const labelFashionNoun = petData?.fashion_noun?.map((i) => i.item) || [];
+  const fashionNounData = labelFashionNoun.length > 0 ? {
     labels: labelFashionNoun,
     datasets: [
       {
-        label: "fashion noun",
+        label: "Fashion Noun",
         data: petData?.fashion_noun?.map((i) => i.frequency),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
-  };
+  } : null;
 
-  
-
-  const labelFashionAdj = petData?.fashion_adj?.map((i) => i.item);
-  const fashionAdjData = {
+  const labelFashionAdj = petData?.fashion_adj?.map((i) => i.item) || [];
+  const fashionAdjData = labelFashionAdj.length > 0 ? {
     labels: labelFashionAdj,
     datasets: [
       {
-        label: "fashion adj",
+        label: "Fashion Adj",
         data: petData?.fashion_adj?.map((i) => i.frequency),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        borderColor: "rgb(75, 192, 192)",
+        backgroundColor: "rgba(153, 102, 255, 0.5)",
       },
     ],
-  };
+  } : null;
 
-  const labelDrugsNoun = petData?.drugs_noun?.map((i) => i.item);
-  const drugsNounData = {
+  const labelDrugsNoun = petData?.drugs_noun?.map((i) => i.item) || [];
+  const drugsNounData = labelDrugsNoun.length > 0 ? {
     labels: labelDrugsNoun,
     datasets: [
       {
-        label: "drugs noun",
+        label: "Drugs Noun",
         data: petData?.drugs_noun?.map((i) => i.frequency),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
-  };
+  } : null;
 
-  const labelDrugsAdj = petData?.drugs_adj?.map((i) => i.item);
-  const drugsAdjData = {
+  const labelDrugsAdj = petData?.drugs_adj?.map((i) => i.item) || [];
+  const drugsAdjData = labelDrugsAdj.length > 0 ? {
     labels: labelDrugsAdj,
     datasets: [
       {
-        label: "drugs adj",
+        label: "Drugs Adj",
         data: petData?.drugs_adj?.map((i) => i.frequency),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        borderColor: "rgb(75, 192, 192)",
+        backgroundColor: "rgba(153, 102, 255, 0.5)",
       },
     ],
-  };
+  } : null;
 
-  const labelAccNoun = petData?.accessories_noun?.map((i) => i.item);
-  const accNounData = {
+  const labelAccNoun = petData?.accessories_noun?.map((i) => i.item) || [];
+  const accNounData = labelAccNoun.length > 0 ? {
     labels: labelAccNoun,
     datasets: [
       {
-        label: "accessories noun",
+        label: "Accessories Noun",
         data: petData?.accessories_noun?.map((i) => i.frequency),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
-  };
+  } : null;
 
-  const labelAccAdj = petData?.accessories_adj?.map((i) => i.item);
-  const accAdjData = {
+  const labelAccAdj = petData?.accessories_adj?.map((i) => i.item) || [];
+  const accAdjData = labelAccAdj.length > 0 ? {
     labels: labelAccAdj,
     datasets: [
       {
-        label: "accessories adj",
+        label: "Accessories Adj",
         data: petData?.accessories_adj?.map((i) => i.frequency),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        borderColor: "rgb(75, 192, 192)",
+        backgroundColor: "rgba(153, 102, 255, 0.5)",
       },
     ],
-  };
-
+  } : null;
 
 
   const getData = () => {
     switch (selectedChart) {
-      case 'foodnoun':
-        return { data: foodNounData, title: "Food Noun" };
-      case 'foodadj':
-        return { data: foodAdjData, title: "Food Adjective" };
-      case 'fashionnoun':
-        return { data: fashionNounData, title: "Fashion Noun" };
-      case 'fashionadj':
-        return { data: fashionAdjData, title: "Fashion Adjective" };
-      case 'drugsnoun':
-        return { data: drugsNounData, title: "Drugs Noun" };
-      case 'drugsadj':
-        return { data: drugsAdjData, title: "Drugs Adjective" };
-      case 'accnoun':
-        return { data: accNounData, title: "Accessories Noun" };
-      case 'accadj':
-        return { data: accAdjData, title: "Accessories Adjective" };
+      case 'food':
+        return [
+          { data: foodNounData, title: "Food Noun"},
+          { data: foodAdjData, title: "Food Adj"},
+        ].filter(chart => chart.data); 
+      case 'fashion':
+        return [
+          { data: fashionNounData, title: "Fashion Noun"},
+          { data: fashionAdjData, title: "Fashion Adj"},
+        ].filter(chart => chart.data); 
+      case 'drugs':
+        return [
+          { data: drugsNounData, title: "Drugs Noun"},
+          { data: drugsAdjData, title: "Drugs Adj"},
+        ].filter(chart => chart.data); 
+      case 'accessories':
+        return [
+          { data: accNounData, title: "Accessories Noun"},
+          { data: accAdjData, title: "Accessories Adj"},
+        ].filter(chart => chart.data); 
       default:
-        return { data: foodNounData, title: "Food Noun" };
+        return [
+          { data: foodNounData, title: "Food Noun"},
+          { data: foodAdjData, title: "Food Adj"},
+        ].filter(chart => chart.data); 
     }
   };
 
-  const { data, title } = getData();
-  const options = getOptions(title);
+  const charts = getData().map(({ data, title }, index) => (
+    <div key={index} style={{ height: '600px', marginBottom: '20px' }}>
+      <Bar options={getOptions(title)} data={data} />
+    </div>
+  ));
 
-
-  if (loading) {
+  if (loadingNega || loadingPosi) {
     return <div>LOADING ...</div>;
   }
   return (
@@ -206,7 +212,7 @@ const Pet = () => {
           className={`red-button ${selectedType === 'positive' ? 'selected' : ''}`}
           onClick={() => {
             setSelectedType('positive');
-            setSelectedChart('foodnoun'); 
+            setSelectedChart('food'); 
           }}
         >
           Positive
@@ -215,7 +221,7 @@ const Pet = () => {
           className={`red-button ${selectedType === 'negative' ? 'selected' : ''}`}
           onClick={() => {
             setSelectedType('negative');
-            setSelectedChart('foodnoun'); 
+            setSelectedChart('food'); 
           }}
         >
           Negative
@@ -224,60 +230,33 @@ const Pet = () => {
 
       <div className="button-container">
         <button
-          className={`blue-button ${selectedChart === 'foodnoun' ? 'selected' : ''}`}
-          onClick={() => setSelectedChart('foodnoun')}
+          className={`blue-button ${selectedChart === 'food' ? 'selected' : ''}`}
+          onClick={() => setSelectedChart('food')}
+        >
+          Food 
+        </button>
+        <button
+          className={`blue-button ${selectedChart === 'fashion' ? 'selected' : ''}`}
+          onClick={() => setSelectedChart('fashion')}
+        >
+          Fashion
+        </button>
+        <button
+          className={`blue-button ${selectedChart === 'drugs' ? 'selected' : ''}`}
+          onClick={() => setSelectedChart('drugs')}
+        >
+          Drugs
+        </button>
+        <button
+          className={`blue-button ${selectedChart === 'accessories' ? 'selected' : ''}`}
+          onClick={() => setSelectedChart('accessories')}
         >
           Food Noun
         </button>
-        <button
-          className={`blue-button ${selectedChart === 'foodadj' ? 'selected' : ''}`}
-          onClick={() => setSelectedChart('foodadj')}
-        >
-          Food Adj
-        </button>
-        <button
-          className={`blue-button ${selectedChart === 'fashionnoun' ? 'selected' : ''}`}
-          onClick={() => setSelectedChart('fashionnoun')}
-        >
-          Fashion Noun
-        </button>
-        <button
-          className={`blue-button ${selectedChart === 'fashionadj' ? 'selected' : ''}`}
-          onClick={() => setSelectedChart('fashionadj')}
-        >
-          Fashion Adj
-        </button>
-        <button
-          className={`blue-button ${selectedChart === 'drugsnoun' ? 'selected' : ''}`}
-          onClick={() => setSelectedChart('drugsnoun')}
-        >
-          Drugs Noun
-        </button>
-        <button
-          className={`blue-button ${selectedChart === 'drugsadj' ? 'selected' : ''}`}
-          onClick={() => setSelectedChart('drugsadj')}
-        >
-          Drugs Adj
-        </button>
-        <button
-          className={`blue-button ${selectedChart === 'accnoun' ? 'selected' : ''}`}
-          onClick={() => setSelectedChart('accnoun')}
-        >
-          Accessories Noun
-        </button>
-        <button
-          className={`blue-button ${selectedChart === 'accadj' ? 'selected' : ''}`}
-          onClick={() => setSelectedChart('accadj')}
-        >
-          Accessories Adj
-        </button>
       </div>
-      <div > 
-        <Bar options={options} data={data} />
-      </div>
+      {charts.length > 0 ? charts : <div>No data</div>}
     </div>
   ); 
-  
 };
 
 export default Pet;
