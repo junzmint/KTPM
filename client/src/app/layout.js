@@ -32,9 +32,14 @@ export default function RootLayout({ children }) {
         path: "/healthcare",
       },
       {
-        id: 2,
+        id: 4,
         name: "Thời trang nữ",
         path: "/woman-fashion",
+      },
+      {
+        id: 5,
+        name: "Balo túi ví nam",
+        path: "/bag",
       },
     ],
   };
