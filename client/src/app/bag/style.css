@@ -1,0 +1,26 @@
+select {
+  width: 5cm; 
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  color: #333;
+  transition: border-color 0.3s ease;
+  margin: 10px 20px;
+}
+.category-title {
+  margin: 10px 3cm; 
+  font-size: 24px; 
+  font-weight: bold; 
+}
+
+select:focus {
+  border-color: #66afe9;
+  outline: none;
+  box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+option {
+  padding: 10px;
+}
