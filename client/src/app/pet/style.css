@@ -1,43 +1,28 @@
-.button-container {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px; 
-  }
 
+select {
+  width: 5cm; 
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  color: #333;
+  transition: border-color 0.3s ease;
+  margin: 10px 20px;
+}
+.category-title {
+  margin: 10px 3cm; 
+  font-size: 24px; 
+  font-weight: bold; 
+}
 
-.blue-button {
-    background-color: rgb(0, 208, 255);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin-right: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .blue-button:hover {
-    background-color: darkblue;
-  }
-  .blue-button.selected {
-    background-color: darkblue;
-    font-weight: bold; 
-  }
+select:focus {
+  border-color: #66afe9;
+  outline: none;
+  box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
 
-.red-button {
-    background-color: rgb(254, 72, 72);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease; /* Smooth transition for background color */
-  }
-  
-  .red-button:hover {
-    background-color: darkred;
-  }
-  
-  .red-button.selected {
-    background-color: darkred;
-    font-weight: bold; /* Makes the selected button text bold */
-  }
+option {
+  padding: 10px;
+}
+

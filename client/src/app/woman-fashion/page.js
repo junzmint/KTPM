@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import { useFetch } from "@/hooks/useFetch";
+import './style.css'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -114,7 +115,7 @@ const WomanFashion = () => {
   }
   return (
     <div>
-      <div>Lựa chọn danh mục</div>
+      <div className="category-title">Lựa chọn danh mục</div>
       <select
         name="category"
         id="category"
